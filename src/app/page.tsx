@@ -1,99 +1,132 @@
 import Image from "next/image";
+import Link from "next/link";
+
+export const dynamic = 'force-dynamic';
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-16 py-12">
+    <div>
       {/* Hero Section */}
-      <section className="container mx-auto px-4 text-center">
-        <h1 className="mb-8">The Specify4IT automated reasoning toolset creates error free code from provable specifications</h1>
-        <p className="text-body max-w-3xl mx-auto">Specify4IT™ is an innovative product conceived, designed and built specifically for developers who want to create relational database software right first time.</p>
-      </section>
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <section className="section">
+        <div className="container">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-center mb-8">Specification Management Software</h1>
+            <p className="text-center mb-12">
+              Specify4IT is a cloud-based specification management software
+              designed specifically for construction industry professionals.
+            </p>
+            <div className="relative">
+              <Image
+                src="/images/specify4it-hero.gif"
+                alt="Specify4IT Demo"
+                width={800}
+                height={450}
+                priority
+                className="w-full h-auto shadow-glow rounded-lg"
+              />
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+      </section>
+
+      {/* Features Section */}
+      <section className="section bg-darker">
+        <div className="container">
+          <h2 className="text-center mb-16">Why Choose Specify4IT?</h2>
+          <div className="grid">
+            <div className="text-center">
+              <h4 className="mb-6">Easy to Use</h4>
+              <p>
+                Our intuitive interface makes it simple to create, edit, and manage
+                your specifications.
+              </p>
+            </div>
+            <div className="text-center">
+              <h4 className="mb-6">Cloud-Based</h4>
+              <p>
+                Access your specifications from anywhere, collaborate with your
+                team in real-time.
+              </p>
+            </div>
+            <div className="text-center">
+              <h4 className="mb-6">Industry-Specific</h4>
+              <p>
+                Built specifically for construction professionals, with features
+                tailored to your needs.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="section bg-gradient-to-b from-background to-background-darker text-center">
+        <div className="container">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="section-title mb-12">
+              Get in touch today
+            </h2>
+            <Link href="/contact" className="btn-primary inline-block">
+              to find out more
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Section */}
+      <section className="container mx-auto px-4">
+        <h2 className="text-center mb-12">Why Specify4IT?</h2>
+        <div className="max-w-4xl mx-auto">
+          <h4 className="mb-6">Create code without error</h4>
+          <p className="text-body mb-12">
+            Creating "right first time" software for large modern programs is almost impossible, and users are continually frustrated by needing to install patches and updates. This is not an easy issue to solve as modern programs and programming languages are often too complex to be fully understood and checked by individual programmers. Often clients cannot specify their needs clearly, precisely, and unambiguously, making it difficult for the programmer to create code without errors.
+          </p>
+          <p className="text-body mb-16">
+            Specify4IT creates error free database systems faster, mathematically provable, in exact accordance with the required specifications.
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+            <div>
+              <Image src="/images/check.svg" alt="Check" width={64} height={64} className="mx-auto mb-4" />
+              <h5>Check</h5>
+              <p className="text-sm">there are no conflicts</p>
+            </div>
+            <div>
+              <Image src="/images/animate.svg" alt="Animate" width={64} height={64} className="mx-auto mb-4" />
+              <h5>Animate</h5>
+              <p className="text-sm">user behaviour specification</p>
+            </div>
+            <div>
+              <Image src="/images/deduce.svg" alt="Deduce" width={64} height={64} className="mx-auto mb-4" />
+              <h5>Deduce</h5>
+              <p className="text-sm">the customer requirements</p>
+            </div>
+            <div>
+              <Image src="/images/prove.svg" alt="Prove" width={64} height={64} className="mx-auto mb-4" />
+              <h5>Prove</h5>
+              <p className="text-sm">the application properties</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Background Section */}
+      <section className="container mx-auto px-4">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-center mb-12">Our background</h2>
+          <h4 className="mb-6">A dedicated career</h4>
+          <p className="text-body mb-12">
+            John Warren has spent his 50-year career dedicated to software engineering and specification, resulting in him leading a successful consultancy, delivering projects to clients such as British Airports Authority, British Gas, UK Department of Health, UK Department of Trade and Industry, London Stock Exchange, National Grid PLC, Nuclear Electric PLC, UK Ministry of Defence, and Rio Tinto PLC.
+          </p>
           <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            src="/images/Connections-2-frame-1.png"
+            alt="Connections visualization"
+            width={800}
+            height={450}
+            className="mx-auto"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        </div>
+      </section>
     </div>
   );
 }

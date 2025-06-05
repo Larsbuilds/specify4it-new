@@ -9,19 +9,23 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        'zen-dots': ['var(--font-zen-dots)', 'cursive'],
-        'space-mono': ['var(--font-space-mono)', 'monospace'],
+        mono: "'Space Mono', monospace",
+        display: "'Zen Dots', cursive",
       },
       colors: {
-        primary: '#00A3D9',
-        background: '#040414',
+        background: 'rgb(var(--background) / <alpha-value>)',
+        text: 'rgb(var(--text) / <alpha-value>)',
+        'background-darker': 'rgb(var(--background-darker) / <alpha-value>)',
+        primary: 'rgb(var(--primary) / <alpha-value>)',
       },
-      fontSize: {
-        'h1': '62px',
-        'h2': '50px',
-        'h4': '28px',
-        'h5': '24px',
-        'body': '20px',
+      spacing: {
+        18: '4.5rem',
+      },
+      maxWidth: {
+        '8xl': '1166px',
+      },
+      boxShadow: {
+        'glow': '0 0 50px rgba(0, 163, 217, 0.3)',
       },
     },
   },

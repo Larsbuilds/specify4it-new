@@ -5,14 +5,16 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const spaceMono = Space_Mono({
-  weight: ["400", "700"],
   subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
   variable: "--font-space-mono",
 });
 
 const zenDots = Zen_Dots({
-  weight: ["400"],
   subsets: ["latin"],
+  weight: "400",
+  display: "swap",
   variable: "--font-zen-dots",
 });
 
@@ -23,16 +25,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body className={`${spaceMono.variable} ${zenDots.variable} antialiased bg-[#040414] text-white min-h-screen flex flex-col`}>
-          <Header />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-        </body>
+    <html lang="en" className={`${spaceMono.variable} ${zenDots.variable}`}>
+      <body className="min-h-screen flex flex-col bg-background text-white antialiased">
+        <Header />
+        <main className="flex-grow">{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }
