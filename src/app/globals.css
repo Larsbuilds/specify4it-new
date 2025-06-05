@@ -30,6 +30,10 @@
   p {
     @apply text-body mb-4;
   }
+
+  a {
+    @apply transition-all duration-200;
+  }
 }
 
 @layer components {
@@ -47,6 +51,22 @@
 
   .section-hero {
     @apply my-section-lg w-full max-w-content mx-auto;
+  }
+
+  .feature-card {
+    @apply p-6 rounded-lg bg-darkBlue/30 backdrop-blur-sm hover:bg-darkBlue/40 hover:shadow-glow transition-all duration-300;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg text-sm uppercase tracking-wider font-mono transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply btn bg-brandBlue text-white hover:bg-brandBlue/90 hover:shadow-glow;
+  }
+
+  .btn-outline {
+    @apply btn border border-white/20 hover:border-brandBlue hover:text-brandBlue;
   }
 
   .section-content {

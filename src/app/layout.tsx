@@ -19,8 +19,21 @@ const zenDots = Zen_Dots({
 });
 
 export const metadata: Metadata = {
-  title: "Specify4IT - Specification Management Software",
-  description: "Specification management software for construction industry professionals",
+  title: "Specify4IT - Error-Free Code from Provable Specifications",
+  description: "Create error-free code through mathematically proven specifications. The Specify4IT automated reasoning toolset helps developers create relational database software right first time.",
+  keywords: ["specification management", "software development", "automated reasoning", "error-free code", "mathematical proofs", "relational database", "software engineering"],
+  authors: [{ name: "Precision Design Technology Ltd" }],
+  creator: "John Warren",
+  publisher: "Precision Design Technology Ltd",
+  robots: "index, follow",
+  openGraph: {
+    type: "website",
+    locale: "en_GB",
+    url: "https://specify4it.com",
+    title: "Specify4IT - Error-Free Code from Provable Specifications",
+    description: "Create error-free code through mathematically proven specifications. The Specify4IT automated reasoning toolset helps developers create relational database software right first time.",
+    siteName: "Specify4IT",
+  },
 };
 
 export default function RootLayout({
