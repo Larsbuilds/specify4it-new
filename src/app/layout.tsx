@@ -29,10 +29,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${spaceMono.variable} ${zenDots.variable}`}>
-      <body className="min-h-screen flex flex-col bg-background text-white antialiased">
+    <html lang="en" className={`${spaceMono.variable} ${zenDots.variable} scroll-smooth`}>
+      <body className="min-h-screen flex flex-col bg-darkBlue text-white antialiased">
         <Header />
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow pt-[64px] md:pt-[80px]">{children}</main>
         <Footer />
       </body>
     </html>
