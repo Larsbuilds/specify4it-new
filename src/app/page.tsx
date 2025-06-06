@@ -1,9 +1,8 @@
 import Image from 'next/image';
-
 import FeatureCard from '@/components/FeatureCard';
 import CTASection from '@/components/CTASection';
 
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-static';
 
 export default function Home() {
   return (
@@ -14,7 +13,7 @@ export default function Home() {
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="mb-8">Specification Management Software</h1>
             <p className="text-body mb-12 mx-auto max-w-2xl">
-              The Specify4IT automated reasoning toolset creates error free code from provable specifications. 
+              The automated reasoning toolset creates error free code from provable specifications. 
               Specify4IT™ is an innovative product conceived, designed and built specifically for developers 
               who want to create relational database software right first time.
             </p>
@@ -41,7 +40,7 @@ export default function Home() {
               </p>
               <p className="text-body">
                 This impressive technology has been developed by leading technology expert John Warren, 
-                whose work over 35 years has created a new method called &quot;provable specification&quot;.
+                whose work over 35 years has created a new method called "provable specification".
               </p>
             </div>
           </div>
@@ -61,7 +60,7 @@ export default function Home() {
           <div className="max-w-3xl mx-auto mb-16">
             <h4 className="text-h4 mb-6">Create code without error</h4>
             <p className="text-body mb-8">
-              Creating &quot;right first time&quot; software for large modern programs is almost impossible, 
+              Creating "right first time" software for large modern programs is almost impossible, 
               and users are continually frustrated by needing to install patches and updates. 
               This is not an easy issue to solve as modern programs and programming languages 
               are often too complex to be fully understood and checked by individual programmers. 

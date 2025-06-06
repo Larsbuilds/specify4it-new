@@ -1,4 +1,17 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Specify4IT Website
+
+This is the official website for Specify4IT, built with [Next.js](https://nextjs.org) and optimized for performance. The site showcases error-free code creation through mathematically proven specifications.
+
+## Performance Features
+
+- Image optimization with WebP format and responsive sizes
+- Optimized font loading with preconnect
+- Enhanced security headers and caching strategies
+- JIT-compiled Tailwind CSS
+- Optimized JavaScript delivery
+- HTTP/2 push support
+
+This project was bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
