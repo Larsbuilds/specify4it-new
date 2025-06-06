@@ -52,25 +52,27 @@ export default function Header() {
               <NavigationMenuItem>
                 <NavigationMenuTrigger>THE PRODUCT</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 bg-darkBlue/95 backdrop-blur-sm border border-darkBlue/30 rounded-md">
-                    {components.map((component) => (
-                      <ListItem
-                        key={component.title}
-                        title={component.title}
-                        href={component.href}
-                      >
-                        {component.description}
-                      </ListItem>
-                    ))}
-                  </ul>
+                  <div className="absolute left-0 top-0">
+                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 bg-darkBlue/95 backdrop-blur-sm border border-darkBlue/30 rounded-md mt-2">
+                      {components.map((component) => (
+                        <ListItem
+                          key={component.title}
+                          title={component.title}
+                          href={component.href}
+                        >
+                          {component.description}
+                        </ListItem>
+                      ))}
+                    </ul>
+                  </div>
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
                 <NavigationMenuTrigger>ABOUT US</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="absolute right-0">
-                    <ul className="grid gap-3 p-4 w-[500px] bg-darkBlue/95 backdrop-blur-sm border border-darkBlue/30 rounded-md">
+                  <div className="absolute right-0 top-0">
+                    <ul className="grid gap-3 p-4 w-[500px] bg-darkBlue/95 backdrop-blur-sm border border-darkBlue/30 rounded-md mt-2">
                       <ListItem
                         title="Our Mission"
                         href="/about#mission"
