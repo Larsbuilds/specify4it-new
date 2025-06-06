@@ -38,7 +38,7 @@ export default function AboutPage() {
             </p>
             <p className="text-body mb-8">
               This impressive technology has been developed by leading technology expert John Warren, 
-              whose work over 35 years has created a new method called "provable specification".
+              whose work over 35 years has created a new method called &quot;provable specification&quot;.
             </p>
           </div>
         </div>
