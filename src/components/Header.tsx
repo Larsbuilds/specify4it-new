@@ -33,7 +33,7 @@ const components: { title: string; href: string; description: string }[] = [
 
 export default function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-darkBlue/95 backdrop-blur-sm border-b border-darkBlue/30">
+    <div className="fixed top-0 left-0 right-0 z-50 bg-darkBlue/95 backdrop-blur-sm border-b border-darkBlue/30">
       <div className="max-w-[1400px] mx-auto px-6">
         <div className="flex items-center h-[64px] md:h-[80px]">
           <Link href="/" className="mr-auto">
@@ -47,50 +47,65 @@ export default function Header() {
             />
           </Link>
           
-          <NavigationMenu className="relative">
+          <NavigationMenu>
             <NavigationMenuList className="flex gap-8">
               <NavigationMenuItem>
-                <NavigationMenuTrigger>THE PRODUCT</NavigationMenuTrigger>
+                <NavigationMenuTrigger className="bg-transparent">THE PRODUCT</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="absolute left-0 top-0">
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 bg-darkBlue/95 backdrop-blur-sm border border-darkBlue/30 rounded-md mt-2">
+                  <div className="w-[400px] md:w-[500px] p-4 bg-darkBlue/95 backdrop-blur-sm border border-darkBlue/30 rounded-md">
+                    <div className="grid gap-3 md:grid-cols-2">
                       {components.map((component) => (
-                        <ListItem
+                        <NavigationMenuLink
                           key={component.title}
-                          title={component.title}
                           href={component.href}
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
-                          {component.description}
-                        </ListItem>
+                          <div className="text-sm font-medium leading-none">{component.title}</div>
+                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground mt-2">
+                            {component.description}
+                          </p>
+                        </NavigationMenuLink>
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger>ABOUT US</NavigationMenuTrigger>
+                <NavigationMenuTrigger className="bg-transparent">ABOUT US</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="absolute right-0 top-0">
-                    <ul className="grid gap-3 p-4 w-[500px] bg-darkBlue/95 backdrop-blur-sm border border-darkBlue/30 rounded-md mt-2">
-                      <ListItem
-                        title="Our Mission"
+                  <div className="w-[500px] p-4 bg-darkBlue/95 backdrop-blur-sm border border-darkBlue/30 rounded-md">
+                    <div className="grid gap-3">
+                      <NavigationMenuLink
                         href="/about#mission"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                       >
-                        Creating error-free software through mathematical precision.
-                      </ListItem>
-                      <ListItem
-                        title="The Team"
+                        <div className="text-sm font-medium leading-none">Our Mission</div>
+                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground mt-2">
+                          Creating error-free software through mathematical precision.
+                        </p>
+                      </NavigationMenuLink>
+
+                      <NavigationMenuLink
                         href="/about#team"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                       >
-                        Meet the experts behind Specify4IT.
-                      </ListItem>
-                      <ListItem
-                        title="John's Accomplishments"
+                        <div className="text-sm font-medium leading-none">The Team</div>
+                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground mt-2">
+                          Meet the experts behind Specify4IT.
+                        </p>
+                      </NavigationMenuLink>
+
+                      <NavigationMenuLink
                         href="/about#accomplishments"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                       >
-                        Chartered Engineer (C.Eng.), Chartered IT Practitioner (CITP), Chartered Fellow of BCS (FBCS), and MIET member with a Master's in Software Engineering from Oxford.
-                      </ListItem>
+                        <div className="text-sm font-medium leading-none">John's Accomplishments</div>
+                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground mt-2">
+                          Chartered Engineer (C.Eng.), Chartered IT Practitioner (CITP), Chartered Fellow of BCS (FBCS), and MIET member with a Master's in Software Engineering from Oxford.
+                        </p>
+                      </NavigationMenuLink>
+
                       <div className="mt-4">
                         <h4 className="mb-2 text-sm font-medium text-blue-400">Selected Publications</h4>
                         <ul className="grid gap-2 text-sm text-muted-foreground">
@@ -116,7 +131,7 @@ export default function Header() {
                           </li>
                         </ul>
                       </div>
-                    </ul>
+                    </div>
                   </div>
                 </NavigationMenuContent>
               </NavigationMenuItem>
@@ -133,7 +148,7 @@ export default function Header() {
           </NavigationMenu>
         </div>
       </div>
-    </header>
+    </div>
   );
 }
 
