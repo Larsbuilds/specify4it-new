@@ -8,12 +8,13 @@ export default function ProductPage() {
       <section className="intro flex flex-col gap-12 my-12 mb-24 md:max-w-[75%] max-w-full">
         <h1 className="font-['Zen_Dots'] text-[62px] font-normal leading-normal normal-case tracking-[-0.02em]">
           Create error free
-          <span className="text-[#00A3D9] block">database systems faster</span>
+          <span className="text-[#00A3D9] block">database</span>
+          <span className="text-[#00A3D9] block">systems faster</span>
         </h1>
         <h3 className="text-xl md:text-2xl font-normal">
           a new and innovative axiomatic reasoning theory to create provable specifications.
         </h3>
-        <a href="mailto:tim.warren@specify4it.com?subject=Interest in Specify4IT">
+        <a href="mailto:tim.warren@specify4it.com?subject=Interest in &quot;Specify4IT&quot;">
           <button className="relative border-none text-white text-center font-['Space_Mono'] text-base font-bold leading-normal tracking-[1.6px] uppercase py-3 px-6 bg-transparent overflow-hidden box-border shadow-[inset_0px_0px_0px_1px_#fff] transition-all duration-500 ease hover:shadow-[inset_0px_0px_0px_1px_#00A3D9] hover:text-[#00A3D9] before:absolute before:content-[''] before:h-full before:w-1/4 before:bg-[#040414] before:blur-[23px] before:right-0 before:top-0 before:z-[4] before:transition-all before:duration-500 before:ease">
             GET IN TOUCH
           </button>
@@ -46,7 +47,7 @@ export default function ProductPage() {
             <p className="text-lg mb-8">
               Specify4IT can then use this mathematically defined specification, which has been agreed by the client, and automatically generate error free code.
             </p>
-            <a href="mailto:tim.warren@specify4it.com?subject=Interest in Specify4IT">
+            <a href="mailto:tim.warren@specify4it.com?subject=Interest in &quot;Specify4IT&quot;">
               <button className="bg-[#00A3FF] hover:bg-[#0082CC] text-white px-8 py-3 rounded transition-colors">
                 Get in touch
               </button>
@@ -92,9 +93,8 @@ export default function ProductPage() {
       <ProductSection />
       <CTASection 
         title="Get in touch today"
-        href="mailto:tim.warren@specify4it.com?subject=Interest in Specify4IT"
+        href="mailto:tim.warren@specify4it.com?subject=Interest in &quot;Specify4IT&quot;"
       />
     </main>
   );
 }
-

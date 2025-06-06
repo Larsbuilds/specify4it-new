@@ -19,6 +19,7 @@ const zenDots = Zen_Dots({
 });
 
 export const metadata: Metadata = {
+  metadataBase: process.env.NODE_ENV === 'development' ? new URL('http://localhost:3000') : new URL('https://specify4it.com'),
   title: "Specify4IT - Error-Free Code from Provable Specifications",
   description: "Create error-free code through mathematically proven specifications. The Specify4IT automated reasoning toolset helps developers create relational database software right first time.",
   keywords: ["specification management", "software development", "automated reasoning", "error-free code", "mathematical proofs", "relational database", "software engineering"],

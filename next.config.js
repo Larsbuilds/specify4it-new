@@ -3,11 +3,11 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  reactStrictMode: true,
-  swcMinify: true,
-  experimental: {
-    appDir: true,
+  eslint: {
+    ignoreDuringBuilds: true
   },
+  poweredByHeader: false,
+  generateEtags: false
 }
 
 module.exports = nextConfig
