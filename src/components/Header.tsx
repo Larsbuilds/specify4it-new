@@ -1,22 +1,42 @@
 "use client";
 
-import { useState } from "react";
+import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+
+const components: { title: string; href: string; description: string }[] = [
+  {
+    title: "Automated Reasoning",
+    href: "/product#automated-reasoning",
+    description: "Generate error-free code through mathematically proven specifications.",
+  },
+  {
+    title: "Database Design",
+    href: "/product#database-design",
+    description: "Create relational database software right the first time.",
+  },
+  {
+    title: "Specification Management",
+    href: "/product#specification",
+    description: "Manage and validate your specifications with precision.",
+  },
+];
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-    document.body.style.overflow = !isMenuOpen ? 'hidden' : '';
-  };
-
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-darkBlue border-b border-darkBlue/30">
-      <div className="container">
-        <div className="flex justify-between items-center h-header-mobile md:h-header">
-          <Link href="/" className="flex-shrink-0">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-darkBlue/95 backdrop-blur-sm border-b border-darkBlue/30">
+      <div className="max-w-[1400px] mx-auto px-6">
+        <div className="flex items-center h-[64px] md:h-[80px]">
+          <Link href="/" className="mr-auto">
             <Image
               src="/images/specify4itlogo.svg"
               alt="Specify4IT"
@@ -26,95 +46,80 @@ export default function Header() {
               className="h-8 md:h-10 w-auto"
             />
           </Link>
-          <nav className="hidden md:block">
-            <ul className="flex space-x-8 lg:space-x-12">
-              <li>
-                <Link href="/product" className="nav-link">
-                  THE PRODUCT
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="nav-link">
-                  ABOUT US
-                </Link>
-              </li>
-              <li>
-                <a 
-                  href="mailto:tim.warren@specify4it.com?subject=Interest%20in%20Specify4IT" 
-                  className="nav-link"
+          
+          <NavigationMenu>
+            <NavigationMenuList className="flex gap-8">
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>THE PRODUCT</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
+                    {components.map((component) => (
+                      <ListItem
+                        key={component.title}
+                        title={component.title}
+                        href={component.href}
+                      >
+                        {component.description}
+                      </ListItem>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>ABOUT US</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid gap-3 p-4 w-[300px]">
+                    <ListItem
+                      title="Our Mission"
+                      href="/about#mission"
+                    >
+                      Creating error-free software through mathematical precision.
+                    </ListItem>
+                    <ListItem
+                      title="The Team"
+                      href="/about#team"
+                    >
+                      Meet the experts behind Specify4IT.
+                    </ListItem>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuLink 
+                  className={navigationMenuTriggerStyle()}
+                  href="mailto:tim.warren@specify4it.com?subject=Interest%20in%20Specify4IT"
                 >
                   CONTACT US
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <button 
-            className="md:hidden p-2" 
-            aria-label="Menu"
-            onClick={toggleMenu}
-          >
-            <svg 
-              className="w-6 h-6 text-white" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              {isMenuOpen ? (
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M6 18L18 6M6 6l12 12" 
-                />
-              ) : (
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M4 6h16M4 12h16M4 18h16" 
-                />
-              )}
-            </svg>
-          </button>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 top-[64px] bg-darkBlue z-40 md:hidden">
-          <nav className="container py-8">
-            <ul className="space-y-6 text-center">
-              <li>
-                <Link 
-                  href="/product" 
-                  className="nav-link text-2xl block py-2"
-                  onClick={toggleMenu}
-                >
-                  THE PRODUCT
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/about" 
-                  className="nav-link text-2xl block py-2"
-                  onClick={toggleMenu}
-                >
-                  ABOUT US
-                </Link>
-              </li>
-              <li>
-                <a 
-                  href="mailto:tim.warren@specify4it.com?subject=Interest%20in%20Specify4IT" 
-                  className="nav-link text-2xl block py-2"
-                  onClick={toggleMenu}
-                >
-                  CONTACT US
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      )}
     </header>
   );
 }
+
+const ListItem = React.forwardRef<
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a">
+>(({ className, title, children, ...props }, ref) => {
+  return (
+    <li>
+      <NavigationMenuLink asChild>
+        <a
+          ref={ref}
+          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+          {...props}
+        >
+          <div className="text-sm font-medium leading-none">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+            {children}
+          </p>
+        </a>
+      </NavigationMenuLink>
+    </li>
+  );
+});
