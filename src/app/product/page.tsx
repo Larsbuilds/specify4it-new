@@ -1,89 +1,100 @@
 import Image from 'next/image';
 import CTASection from '@/components/CTASection';
+import { ProductSection } from '@/components/ProductSection';
 
 export default function ProductPage() {
   return (
-    <div className="space-y-24">
-      <section className="section-hero pt-24">
-        <div className="container">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-8">Create error free database systems faster</h1>
-            <p className="text-body mb-12 mx-auto max-w-2xl">
-              A new and innovative axiomatic reasoning theory to create provable specifications.
+    <main className="mt-[70px] px-[3.1rem] md:px-16 overflow-x-hidden scrollbar-none bg-[#040414] bg-[url('/images/grids.svg')] bg-[-7.2rem_top]">
+      <section className="intro flex flex-col gap-12 my-12 mb-24 md:max-w-[75%] max-w-full">
+        <h1 className="font-['Zen_Dots'] text-[62px] font-normal leading-normal normal-case tracking-[-0.02em]">
+          Create error free
+          <span className="text-[#00A3D9] block">database systems faster</span>
+        </h1>
+        <h3 className="text-xl md:text-2xl font-normal">
+          a new and innovative axiomatic reasoning theory to create provable specifications.
+        </h3>
+        <a href="mailto:tim.warren@specify4it.com?subject=Interest in Specify4IT">
+          <button className="relative border-none text-white text-center font-['Space_Mono'] text-base font-bold leading-normal tracking-[1.6px] uppercase py-3 px-6 bg-transparent overflow-hidden box-border shadow-[inset_0px_0px_0px_1px_#fff] transition-all duration-500 ease hover:shadow-[inset_0px_0px_0px_1px_#00A3D9] hover:text-[#00A3D9] before:absolute before:content-[''] before:h-full before:w-1/4 before:bg-[#040414] before:blur-[23px] before:right-0 before:top-0 before:z-[4] before:transition-all before:duration-500 before:ease">
+            GET IN TOUCH
+          </button>
+        </a>
+      </section>
+
+      <section className="why mb-24">
+        <h2 className="text-4xl font-bold mb-12">Why is Specify4IT needed?</h2>
+        <div className="whycontentholder">
+          <div className="whycontent">
+            <h4 className="text-2xl font-bold mb-4">Create code without error</h4>
+            <p className="text-lg">
+              Creating "right first time" software for large modern programs is almost impossible, and users are continually frustrated by needing to install patches and updates. This is not an easy issue to solve as modern programs and programming languages are often too complex to be fully understood and checked by individual programmers. Often clients cannot specify their needs clearly, precisely, and unambiguously, making it difficult for the programmer to create code without errors.
             </p>
-            <div className="relative mb-16">
-              <Image
-                src="/images/Connections-1.gif"
-                alt="Specify4IT Demo"
-                width={800}
-                height={450}
-                priority
-                className="w-full h-auto shadow-glow rounded-lg mx-auto"
-              />
-            </div>
           </div>
         </div>
       </section>
 
-      <section className="py-24 bg-darkBlue/20 backdrop-blur-sm">
-        <div className="container">
-          <div className="max-w-3xl mx-auto">
-            <h4 className="text-h4 mb-6">What does Specify4IT deliver?</h4>
-            <p className="text-body mb-8">
-              Specify4IT creates error free database systems faster, mathematically provable, 
-              in exact accordance with the required specifications.
+      <section className="deliver py-24">
+        <h2 className="text-4xl font-bold mb-8">What does Specify4IT deliver?</h2>
+        <h4 className="text-2xl mb-12">
+          Specify4IT creates <span className="text-[#00A3FF]">error free</span> database systems faster, mathematically provable, in exact accordance with the required specifications.
+        </h4>
+        <div className="grid md:grid-cols-2 gap-12">
+          <div>
+            <h4 className="text-2xl font-bold mb-4">Mathematical proof of correctness</h4>
+            <p className="text-lg mb-6">
+              This is achieved by expressing the specification in a very structured manner; defining the system as a set of processes, interconnected by rules, and triggered by events. In this way, a specification is created that can be mathematically checked for consistency, and its behaviour can be assessed, and animated to ensure correctness, and compliance to the specification can be proven. All before any code is generated.
             </p>
-            <h5 className="text-h5 mb-4">Mathematical proof of correctness</h5>
-            <p className="text-body">
-              This is achieved by expressing the specification in a very structured manner; 
-              defining the system as a set of processes, interconnected by rules, and triggered 
-              by events. In this way, a specification is created that can be mathematically 
-              checked for consistency, and its behaviour can be assessed, and animated to ensure 
-              correctness, and compliance to the specification can be proven. All before any code 
-              is generated.
+            <p className="text-lg mb-8">
+              Specify4IT can then use this mathematically defined specification, which has been agreed by the client, and automatically generate error free code.
             </p>
-            <p className="text-body mt-4 mb-12">
-              Specify4IT can then use this mathematically defined specification, which has been 
-              agreed by the client, and automatically generate error free code.
-            </p>
-
-            <h4 className="text-h4 mb-6">What are the benefits?</h4>
-            <p className="text-body mb-8">
-              Time to deliver can be halved compared to conventional methods
-            </p>
-            <div className="space-y-8">
-              <div>
-                <h5 className="text-h5 mb-4">1. Improved productivity</h5>
-                <p className="text-body">
-                  The creation of high-quality database software more quickly and with significantly 
-                  reduced costs, resulting in improved productivity and profitability.
-                </p>
-              </div>
-              <div>
-                <h5 className="text-h5 mb-4">2. Error free software</h5>
-                <p className="text-body">
-                  The use of this new and innovative axiomatic reasoning system enables every user 
-                  to create accurate specifications that result in error free software. Once specified 
-                  an application can be delivered within hours of its specification being complete.
-                </p>
-              </div>
-              <div>
-                <h5 className="text-h5 mb-4">3. Halving the time</h5>
-                <p className="text-body">
-                  We estimate that database projects created using Specify4IT will only require half 
-                  the staff for half the time to achieve successful delivery, compared to a conventional 
-                  approach.
-                </p>
-              </div>
-            </div>
+            <a href="mailto:tim.warren@specify4it.com?subject=Interest in Specify4IT">
+              <button className="bg-[#00A3FF] hover:bg-[#0082CC] text-white px-8 py-3 rounded transition-colors">
+                Get in touch
+              </button>
+            </a>
+          </div>
+          <div className="relative">
+            <Image
+              src="/images/Connections-4-frame-1.png"
+              alt="Specify4IT Process"
+              width={600}
+              height={400}
+              className="w-full h-auto"
+            />
           </div>
         </div>
       </section>
 
+      <section className="benefits py-24">
+        <h2 className="text-4xl font-bold mb-8">What are the benefits?</h2>
+        <p className="text-xl mb-12">Time to deliver can be halved compared to conventional methods</p>
+        <div className="space-y-8 max-w-3xl mx-auto">
+          <div>
+            <h5 className="text-2xl font-bold mb-4">1. Improved productivity</h5>
+            <p className="text-lg">
+              The creation of high-quality database software more quickly and with significantly reduced costs, resulting in improved productivity and profitability.
+            </p>
+          </div>
+          <div>
+            <h5 className="text-2xl font-bold mb-4">2. Error free software</h5>
+            <p className="text-lg">
+              The use of this new and innovative axiomatic reasoning system enables every user to create accurate specifications that result in error free software. Once specified an application can be delivered within hours of its specification being complete.
+            </p>
+          </div>
+          <div>
+            <h5 className="text-2xl font-bold mb-4">3. Halving the time</h5>
+            <p className="text-lg">
+              We estimate that database projects created using Specify4IT will only require half the staff for half the time to achieve successful delivery, compared to a conventional approach.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <ProductSection />
       <CTASection 
-        title="Ready to eliminate software errors?"
-        href="mailto:tim.warren@specify4it.com?subject=Interest%20in%20Specify4IT"
+        title="Get in touch today"
+        href="mailto:tim.warren@specify4it.com?subject=Interest in Specify4IT"
       />
-    </div>
+    </main>
   );
 }
+
