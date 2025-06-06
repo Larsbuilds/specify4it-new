@@ -44,6 +44,77 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section id="accomplishments" className="py-24 bg-darkBlue/20 backdrop-blur-sm">
+        <div className="container">
+          <div className="max-w-3xl mx-auto">
+            <h4 className="text-h4 mb-6">Professional Accomplishments</h4>
+            <div className="space-y-8">
+              <div>
+                <h5 className="text-h5 mb-4">Certifications & Education</h5>
+                <p className="text-body mb-6">
+                  John is a Chartered Engineer (C.Eng.), Chartered IT Practitioner (CITP), 
+                  a Chartered Fellow of the British Computer Society (FBCS), and a Member of 
+                  the Institution of Engineering Technology (MIET). He gained a Master's Degree 
+                  in Software Engineering from the University of Oxford.
+                </p>
+              </div>
+              
+              <div>
+                <h5 className="text-h5 mb-4">Publications</h5>
+                <p className="text-body mb-4">
+                  John has published various conference papers on the subject of provable software 
+                  and formal methods, including:
+                </p>
+                <ul className="space-y-4 text-body">
+                  <li>
+                    <a 
+                      href="https://www.researchgate.net/publication/302370252_A_Rigorous_Specification_Technique_for_High_Quality_Software" 
+                      className="hover:text-blue-400 transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      A rigorous specifying technique for high quality software. Safety Critical Systems Conference
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="https://scsc.uk/scsc-8" 
+                      className="hover:text-blue-400 transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Practical experience with integrated formal methods. Software Engineering Conference for
+                      Formal Methods
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="https://www.researchgate.net/publication/220795890_Generating_commercial_web_applications_from_precise_requirements_and_formal_specifications" 
+                      className="hover:text-blue-400 transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Generating commercial web applications from precise requirements and formal applications.
+                      Safety Critical Systems Conference
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="https://www.wiley.com/en-ae/Industrial+Use+of+Formal+Methods%3A+Formal+Verification-p-9781848213630" 
+                      className="hover:text-blue-400 transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Industrial Use of Formal Methods (as a contributor). Edited by Jean-louis Boulangere
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 bg-darkBlue/20 backdrop-blur-sm">
         <div className="container">
           <div className="max-w-3xl mx-auto">
