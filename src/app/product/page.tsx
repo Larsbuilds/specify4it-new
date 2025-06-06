@@ -2,6 +2,9 @@ import Image from 'next/image';
 import CTASection from '@/components/CTASection';
 import { ProductSection } from '@/components/ProductSection';
 
+// Enable static generation with ISR
+export const revalidate = 3600; // Revalidate every hour
+
 export default function ProductPage() {
   return (
     <main className="mt-[70px] px-[3.1rem] md:px-16 overflow-x-hidden scrollbar-none bg-[#040414] bg-[url('/images/grids.svg')] bg-[-7.2rem_top]">

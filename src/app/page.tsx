@@ -2,7 +2,7 @@ import Image from 'next/image';
 import FeatureCard from '@/components/FeatureCard';
 import CTASection from '@/components/CTASection';
 
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-static';
 
 export default function Home() {
   return (
