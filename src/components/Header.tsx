@@ -69,7 +69,7 @@ export default function Header() {
               <NavigationMenuItem>
                 <NavigationMenuTrigger>ABOUT US</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid gap-3 p-4 w-[300px]">
+                  <ul className="grid gap-3 p-4 w-[600px]">
                     <ListItem
                       title="Our Mission"
                       href="/about#mission"
@@ -82,6 +82,37 @@ export default function Header() {
                     >
                       Meet the experts behind Specify4IT.
                     </ListItem>
+                    <ListItem
+                      title="John's Accomplishments"
+                      href="/about#accomplishments"
+                    >
+                      Chartered Engineer (C.Eng.), Chartered IT Practitioner (CITP), Chartered Fellow of BCS (FBCS), and MIET member with a Master's in Software Engineering from Oxford.
+                    </ListItem>
+                    <div className="col-span-2 mt-2">
+                      <h4 className="mb-2 text-sm font-medium">Selected Publications</h4>
+                      <ul className="grid gap-2 text-sm text-muted-foreground">
+                        <li>
+                          <Link href="https://www.researchgate.net/publication/302370252_A_Rigorous_Specification_Technique_for_High_Quality_Software" className="hover:text-white transition-colors">
+                            A rigorous specifying technique for high quality software. Safety Critical Systems Conference
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="https://scsc.uk/scsc-8" className="hover:text-white transition-colors">
+                            Practical experience with integrated formal methods. Software Engineering Conference for Formal Methods
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="https://www.researchgate.net/publication/220795890_Generating_commercial_web_applications_from_precise_requirements_and_formal_specifications" className="hover:text-white transition-colors">
+                            Generating commercial web applications from precise requirements and formal applications
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="https://www.wiley.com/en-ae/Industrial+Use+of+Formal+Methods%3A+Formal+Verification-p-9781848213630" className="hover:text-white transition-colors">
+                            Industrial Use of Formal Methods (as a contributor). Edited by Jean-louis Boulangere
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
