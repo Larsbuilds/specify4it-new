@@ -1,9 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+    mode: 'jit',
     darkMode: ['class'],
     content: [
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+    future: {
+      removeDeprecatedGapUtilities: true,
+      purgeLayersByDefault: true,
+    },
   theme: {
     keyframes: {
       "accordion-down": {

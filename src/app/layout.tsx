@@ -3,6 +3,8 @@ import { Space_Mono, Zen_Dots } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Script from 'next/script';
+import { headers } from 'next/headers';
 
 const spaceMono = Space_Mono({
   subsets: ["latin"],
@@ -44,10 +46,36 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${spaceMono.variable} ${zenDots.variable} scroll-smooth`}>
+      <head>
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="theme-color" content="#040414" />
+      </head>
       <body className="min-h-screen flex flex-col bg-darkBlue text-white antialiased">
         <Header />
         <main className="flex-grow pt-[64px] md:pt-[80px]">{children}</main>
         <Footer />
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+        />
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+            `,
+          }}
+        />
       </body>
     </html>
   );
