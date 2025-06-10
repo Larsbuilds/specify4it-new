@@ -1,6 +1,23 @@
+'use client';
+
 import Image from 'next/image';
 import CTASection from '@/components/CTASection';
 import { ProductSection } from '@/components/ProductSection';
+import { motion, type Variants, type HTMLMotionProps } from 'framer-motion';
+
+type MotionDivProps = HTMLMotionProps<"div">;
+
+const fadeInUp: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { 
+      duration: 1.2,
+      ease: [0.16, 1, 0.3, 1]
+    }
+  }
+};
 
 // Enable static generation with ISR
 export const revalidate = 3600; // Revalidate every hour
@@ -8,7 +25,15 @@ export const revalidate = 3600; // Revalidate every hour
 export default function ProductPage() {
   return (
     <main className="mt-[70px] px-[3.1rem] md:px-16 overflow-x-hidden scrollbar-none bg-[#040414] bg-[url('/images/grids.svg')] bg-[-7.2rem_top]">
-      <section className="intro flex flex-col gap-12 my-12 mb-24 md:max-w-[75%] max-w-full">
+      <motion.div
+        {...{
+          className: "intro flex flex-col gap-12 my-12 mb-24 md:max-w-[75%] max-w-full",
+          initial: "hidden",
+          whileInView: "visible",
+          viewport: { once: true, amount: 0.3 },
+          variants: fadeInUp
+        } as MotionDivProps}
+      >
         <h1 className="font-['Zen_Dots'] text-[62px] font-normal leading-normal normal-case tracking-[-0.02em]">
           Create error free
           <span className="text-[#00A3D9] block">database</span>
@@ -22,9 +47,17 @@ export default function ProductPage() {
             GET IN TOUCH
           </button>
         </a>
-      </section>
+      </motion.div>
 
-      <section className="why mb-24">
+      <motion.div
+        {...{
+          className: "why mb-24",
+          initial: "hidden",
+          whileInView: "visible",
+          viewport: { once: true, amount: 0.3 },
+          variants: fadeInUp
+        } as MotionDivProps}
+      >
         <h2 className="text-4xl font-bold mb-12">Why is Specify4IT needed?</h2>
         <div className="whycontentholder">
           <div className="whycontent">
@@ -34,9 +67,17 @@ export default function ProductPage() {
             </p>
           </div>
         </div>
-      </section>
+      </motion.div>
 
-      <section className="deliver py-24">
+      <motion.div
+        {...{
+          className: "deliver py-24",
+          initial: "hidden",
+          whileInView: "visible",
+          viewport: { once: true, amount: 0.3 },
+          variants: fadeInUp
+        } as MotionDivProps}
+      >
         <h2 className="text-4xl font-bold mb-8">What does Specify4IT deliver?</h2>
         <h3 className="text-2xl mb-12">
           Specify4IT creates <span className="text-[#00A3FF]">error free</span> database systems faster, mathematically provable, in exact accordance with the required specifications.
@@ -56,19 +97,38 @@ export default function ProductPage() {
               </button>
             </a>
           </div>
-          <div className="relative">
-            <Image
-              src="/images/Connections-4-frame-1.png"
-              alt="Specify4IT Process"
-              width={1200}
-              height={800}
-              className="w-full h-auto object-contain"
-            />
-          </div>
+          <motion.div
+            {...{
+              className: "relative",
+              initial: { opacity: 0, scale: 0.95 },
+              whileInView: { opacity: 1, scale: 1 },
+              viewport: { once: true, amount: 0.3 },
+              transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }
+            } as MotionDivProps}
+          >
+            <div className="bg-[#0A0B14] rounded-lg overflow-hidden">
+              <Image
+                src="/images/Connections-1.gif"
+                alt="Specify4IT Process Animation"
+                width={1080}
+                height={1080}
+                className="w-full h-auto mix-blend-lighten"
+                style={{ filter: 'brightness(1.2) contrast(1.1)' }}
+              />
+            </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.div>
 
-      <section className="benefits py-24">
+      <motion.div
+        {...{
+          className: "benefits py-24",
+          initial: "hidden",
+          whileInView: "visible",
+          viewport: { once: true, amount: 0.3 },
+          variants: fadeInUp
+        } as MotionDivProps}
+      >
         <h2 className="text-4xl font-bold mb-8">What are the benefits?</h2>
         <p className="text-xl mb-12">Time to deliver can be halved compared to conventional methods</p>
         <div className="space-y-8 max-w-3xl mx-auto">
@@ -91,7 +151,7 @@ export default function ProductPage() {
             </p>
           </div>
         </div>
-      </section>
+      </motion.div>
 
       <ProductSection />
       <CTASection 
@@ -99,5 +159,6 @@ export default function ProductPage() {
         href="mailto:tim.warren@specify4it.com?subject=Interest in &quot;Specify4IT&quot;"
       />
     </main>
+
   );
 }

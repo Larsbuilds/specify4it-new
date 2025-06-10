@@ -1,9 +1,39 @@
+'use client';
+
+import { motion, type HTMLMotionProps, type Variants } from 'framer-motion'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ProductAccordion"
+
+type MotionDivProps = HTMLMotionProps<"div">;
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.4,
+      duration: 1.2,
+      ease: [0.16, 1, 0.3, 1]
+    }
+  }
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 1.2,
+      ease: [0.16, 1, 0.3, 1]
+    }
+  }
+};
 
 const accordionData = [
   {
@@ -31,23 +61,37 @@ The fact is that programming is a complex, labour-intensive and error-prone proc
 
 export function ProductSection() {
   return (
-    <div className="sectionr">
+    <motion.div
+      {...{
+        className: "sectionr",
+        initial: "hidden",
+        whileInView: "visible",
+        viewport: { once: true, amount: 0.2 },
+        variants: containerVariants
+      } as MotionDivProps}
+    >
       <Accordion type="single" defaultValue="item-0" className="w-full divide-y divide-brandBlue/50">
-        {accordionData.map((item, index) => (
-          <AccordionItem
+        {accordionData.map((accordionItem, index) => (
+          <motion.div
             key={index}
-            value={`item-${index}`}
-            className="mb-0"
+            {...{
+              variants: itemVariants
+            } as MotionDivProps}
           >
-            <AccordionTrigger className="hover:no-underline py-2 text-left">
-              <h3 className="text-h3 font-display text-brandBlue">{item.title}</h3>
-            </AccordionTrigger>
-            <AccordionContent className="text-body pl-0">
-              <p className="whitespace-pre-line">{item.content}</p>
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
-    </div>
-  )
+              <AccordionItem
+                value={`item-${index}`}
+                className="mb-0 rounded-lg hover:bg-gray-50/5 transition-colors duration-200"
+              >
+                <AccordionTrigger className="hover:no-underline py-2 text-left">
+                  <h3 className="text-h3 font-display text-brandBlue">{accordionItem.title}</h3>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <p className="text-body">{accordionItem.content}</p>
+                </AccordionContent>
+              </AccordionItem>
+            </motion.div>
+          ))}
+        </Accordion>
+    </motion.div>
+  );
 }
