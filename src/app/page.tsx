@@ -1,8 +1,48 @@
 import Image from 'next/image';
-import { AnimatedVideo } from '@/components/AnimatedVideo';
-import { DynamicFeatureCard, DynamicCTASection } from '@/utils/dynamicImports';
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
 
-export const dynamic = 'force-static';
+interface AnimatedVideoProps {
+  webmSrc: string;
+  mp4Src: string;
+  fallbackSrc: string;
+  width: number;
+  height: number;
+  alt: string;
+  className?: string;
+}
+
+interface FeatureCardProps {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface CTASectionProps {
+  title: string;
+  href: string;
+  className?: string;
+}
+
+const DynamicAnimatedVideo = dynamic<AnimatedVideoProps>(() => import('@/components/AnimatedVideo'), {
+  ssr: false,
+  loading: () => <div className="w-full aspect-video animate-pulse bg-gray-800 rounded" />
+});
+
+const DynamicFeatureCard = dynamic<FeatureCardProps>(() => import('@/components/FeatureCard'), {
+  ssr: false,
+  loading: () => <div className="w-full h-24 animate-pulse bg-gray-800 rounded" />
+});
+
+const DynamicCTASection = dynamic<CTASectionProps>(() => import('@/components/CTASection'), {
+  ssr: false,
+  loading: () => <div className="w-full h-24 animate-pulse bg-gray-800 rounded" />
+});
+
+// Force static generation for this page
+export const metadata = {
+  dynamic: 'force-static',
+};
 
 export default function Home() {
   return (
@@ -11,22 +51,38 @@ export default function Home() {
       <section className="section-hero pt-24">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-h1 mb-8">Specification Management Software</h1>
+            <h1 
+              className="text-h1 mb-8 font-optimization-critical font-display antialiased"
+              suppressHydrationWarning
+              style={{
+                textRendering: 'optimizeLegibility',
+                WebkitFontSmoothing: 'antialiased',
+                MozOsxFontSmoothing: 'grayscale'
+              }}
+            >
+              Specification Management Software
+            </h1>
             <p className="text-body mb-12 mx-auto max-w-2xl">
               The automated reasoning toolset creates error free code from provable specifications. 
               Specify4IT™ is an innovative product conceived, designed and built specifically for developers 
               who want to create relational database software right first time.
             </p>
             <div className="relative mb-16">
-              <AnimatedVideo
-                webmSrc="/videos/Connections-1.webm"
-                mp4Src="/videos/Connections-1.mp4"
-                fallbackSrc="/images/Connections-1.gif"
-                width={800}
-                height={450}
-                alt="Specify4IT Demo"
-                className="w-full h-auto shadow-glow rounded-lg mx-auto"
-              />
+              <Suspense
+                fallback={
+                  <div className="w-full aspect-video animate-pulse bg-gray-800 rounded" />
+                }
+              >
+                <DynamicAnimatedVideo
+                  webmSrc="/videos/Connections-1.webm"
+                  mp4Src="/videos/Connections-1.mp4"
+                  fallbackSrc="/images/Connections-1.gif"
+                  width={1600}
+                  height={900}
+                  alt="Specify4IT Demo"
+                  className="w-full shadow-glow rounded-lg mx-auto aspect-video"
+                />
+              </Suspense>
             </div>
             <div className="max-w-3xl mx-auto">
               <p className="text-body mb-8">
@@ -113,7 +169,7 @@ export default function Home() {
               of Defence, and Rio Tinto PLC.
             </p>
             <div className="relative">
-              <AnimatedVideo
+              <DynamicAnimatedVideo
                 webmSrc="/videos/Connections-2.webm"
                 mp4Src="/videos/Connections-2.mp4"
                 fallbackSrc="/images/Connections-2-frame-1.png"

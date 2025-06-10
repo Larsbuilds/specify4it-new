@@ -40,7 +40,7 @@ export function ProductSection() {
             className="mb-0"
           >
             <AccordionTrigger className="hover:no-underline py-2 text-left">
-              <h4 className="text-h4 font-display text-brandBlue">{item.title}</h4>
+              <h3 className="text-h3 font-display text-brandBlue">{item.title}</h3>
             </AccordionTrigger>
             <AccordionContent className="text-body pl-0">
               <p className="whitespace-pre-line">{item.content}</p>

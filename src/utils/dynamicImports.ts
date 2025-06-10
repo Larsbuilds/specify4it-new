@@ -1,24 +1,34 @@
+'use client';
+
 import dynamic from 'next/dynamic';
+import { type DynamicOptionsLoadingProps } from 'next/dynamic';
 import React from 'react';
 
-// Simple loading component
-const LoadingComponent = () => {
-  return React.createElement('div', { className: 'h-24' });
+const LoadingSection = (_props: DynamicOptionsLoadingProps) => {
+  return React.createElement('div', {
+    className: 'h-24 w-full animate-pulse bg-gray-800 rounded'
+  });
 };
 
-// Dynamically import components that are not needed for initial page load
+const LoadingCard = (_props: DynamicOptionsLoadingProps) => {
+  return React.createElement('div', {
+    className: 'h-24 w-full animate-pulse bg-gray-800 rounded'
+  });
+};
+
 export const DynamicCTASection = dynamic(
-  () => import('@/components/CTASection'),
+  () => import('@/components/CTASection').then(mod => mod.default),
   {
-    loading: LoadingComponent,
+    loading: LoadingSection,
     ssr: false
   }
 );
 
 export const DynamicFeatureCard = dynamic(
-  () => import('@/components/FeatureCard'),
+  () => import('@/components/FeatureCard').then(mod => mod.default),
   {
-    ssr: true
+    loading: LoadingCard,
+    ssr: false
   }
 );
 

@@ -1,9 +1,16 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+function generateNonce() {
+  const array = new Uint8Array(16);
+  crypto.getRandomValues(array);
+  return btoa(Array.from(array).map(byte => String.fromCharCode(byte)).join(''));
+}
+
 // Consolidated security headers
 const securityHeaders = {
-  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
+  'X-DNS-Prefetch-Control': 'on',
+  'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
   'X-Frame-Options': 'DENY',
   'X-Content-Type-Options': 'nosniff',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
@@ -12,11 +19,52 @@ const securityHeaders = {
 
 export function middleware(request: NextRequest) {
   // Handle /en/ redirects
+  if (request.nextUrl.pathname.startsWith('/_next/static/')) {
+    return NextResponse.next(
+      new Response(null, {
+        headers: {
+          'Cache-Control': 'public, max-age=31536000, immutable',
+        },
+      })
+    );
+  }
+
   if (request.nextUrl.pathname.startsWith('/en/')) {
     return NextResponse.redirect(
       new URL(request.nextUrl.pathname.replace('/en/', '/'), request.url)
     );
   }
+
+  const nonce = generateNonce();
+  const cspHeader = {
+    'Content-Security-Policy': [
+      "default-src 'self'",
+      // Required for Next.js production build
+      `script-src 'self' 'unsafe-eval' 'nonce-${nonce}' https://*.googletagmanager.com https://*.google-analytics.com`,
+      // Restrict script elements
+      "script-src-elem 'self' 'nonce-${nonce}' https://*.googletagmanager.com https://*.google-analytics.com",
+      // Block inline event handlers
+      "script-src-attr 'none'",
+      // Report CSP violations
+      "report-uri /api/csp-report",
+      // Allow inline styles and Google Fonts
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "font-src 'self' data: https://fonts.gstatic.com",
+      // Allow images from our domain and data URIs
+      "img-src 'self' data: https: blob:",
+      "media-src 'self' https: blob:",
+      // Allow connections to our domain and Google Analytics
+      "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com",
+      // Security headers
+      "frame-ancestors 'none'",
+      "form-action 'self'",
+      "base-uri 'self'",
+      "object-src 'none'",
+      "worker-src 'self' blob:",
+      "manifest-src 'self'",
+      "upgrade-insecure-requests"
+    ].join('; '),
+  };
 
   const response = NextResponse.next();
 
@@ -34,9 +82,10 @@ export function middleware(request: NextRequest) {
   } else if (pathname.match(/\.(js|css)$/)) {
     // JavaScript and CSS files
     response.headers.set('Cache-Control', 'public, max-age=31536000, immutable');
-  } else if (!pathname.includes('api') && !pathname.includes('_next')) {
+  } else if (!pathname.includes('api') && !pathname.includes('_next/data')) {
     // HTML pages - enable bfcache
-    response.headers.set('Cache-Control', 'no-cache, no-store, max-age=0, must-revalidate');
+    response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate');
+    response.headers.set('Cache-Control-Allow-Private', 'true');
   }
 
   // Ensure no-store is not set for static assets
