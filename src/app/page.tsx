@@ -11,7 +11,7 @@ export default function Home() {
       <section className="section-hero pt-24">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-8">Specification Management Software</h1>
+            <h1 className="text-h1 mb-8">Specification Management Software</h1>
             <p className="text-body mb-12 mx-auto max-w-2xl">
               The automated reasoning toolset creates error free code from provable specifications. 
               Specify4IT™ is an innovative product conceived, designed and built specifically for developers 
@@ -59,7 +59,7 @@ export default function Home() {
         <div className="container">
           <h2 className="text-h2 text-center mb-16">Why Specify4IT?</h2>
           <div className="max-w-3xl mx-auto mb-16">
-            <h4 className="text-h4 mb-6">Create code without error</h4>
+            <h3 className="text-h3 mb-6">Create code without error</h3>
             <p className="text-body mb-8">
               Creating "right first time" software for large modern programs is almost impossible, 
               and users are continually frustrated by needing to install patches and updates. 
@@ -104,7 +104,7 @@ export default function Home() {
         <div className="container">
           <h2 className="text-h2 text-center mb-16">Our background</h2>
           <div className="max-w-3xl mx-auto">
-            <h4 className="text-h4 mb-6">A dedicated career</h4>
+            <h3 className="text-h3 mb-6">A dedicated career</h3>
             <p className="text-body mb-12">
               John Warren has spent his 50-year career dedicated to software engineering and specification, 
               resulting in him leading a successful consultancy, delivering projects to clients such as 
