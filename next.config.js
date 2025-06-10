@@ -1,29 +1,100 @@
+const TerserPlugin = require('terser-webpack-plugin');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
+  reactStrictMode: true,
+  swcMinify: true,
+  poweredByHeader: false,
   images: {
-    unoptimized: false,
-    formats: ['image/webp'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-  },
-  eslint: {
-    ignoreDuringBuilds: true
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
   experimental: {
-    scrollRestoration: true,
+    optimizeCss: true,
+    optimizePackageImports: ['@heroicons/react', 'lucide-react'],
+    serverActions: {
+      bodySizeLimit: '2mb'
+    }
   },
-  compress: true,
-  poweredByHeader: false,
-  generateEtags: true,
-  swcMinify: true,
-  reactStrictMode: true,
+  // Include static assets in standalone build
+  outputFileTracing: true,
+  transpilePackages: ['@heroicons/react', 'lucide-react'],
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
+    removeConsole: process.env.NODE_ENV === 'production'
   },
-  // Enable HTTP/2 push
-  httpAgentOptions: {
-    keepAlive: true,
-  }
-}
+  webpack: (config, { dev, isServer }) => {
+    // Use non-eval source maps
+    if (dev) {
+      config.devtool = 'source-map';
+    }
 
-module.exports = nextConfig
+    // Optimize for production
+    config.optimization = {
+      ...config.optimization,
+      moduleIds: 'deterministic',
+      chunkIds: 'deterministic',
+      splitChunks: {
+        ...config.optimization.splitChunks,
+        chunks: 'all',
+        cacheGroups: {
+          ...config.optimization.splitChunks.cacheGroups,
+          vendors: false,
+          default: false,
+          framework: {
+            chunks: 'all',
+            name: 'framework',
+            test: /[\\/]node_modules[\\/](@vercel\/analytics|react|react-dom|scheduler|prop-types|use-subscription)[\\/-]/,
+            priority: 40,
+            enforce: true,
+          },
+        },
+      },
+    };
+    
+    // Production optimizations
+    if (!dev && !isServer) {
+      config.optimization.minimize = true;
+      config.optimization.minimizer = [
+        ...config.optimization.minimizer || [],
+        new TerserPlugin({
+          terserOptions: {
+            parse: { ecma: 2020 },
+            compress: {
+              ecma: 5,
+              warnings: false,
+              comparisons: false,
+              inline: 2,
+              module: true,
+              reduce_vars: true,
+              pure_getters: true,
+              unsafe_math: true,
+              passes: 3,
+              pure_funcs: [
+                'console.log',
+                'console.info',
+                'console.debug',
+                'console.warn'
+              ]
+            },
+            mangle: { safari10: true },
+            output: {
+              ecma: 5,
+              comments: false,
+              ascii_only: true,
+            },
+          },
+          parallel: true,
+        })
+      ];
+    }
+    
+    return config;
+  }
+};
+
+module.exports = nextConfig;

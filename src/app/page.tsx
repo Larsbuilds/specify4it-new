@@ -1,8 +1,48 @@
 import Image from 'next/image';
-import FeatureCard from '@/components/FeatureCard';
-import CTASection from '@/components/CTASection';
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
 
-export const dynamic = 'force-dynamic';
+interface AnimatedVideoProps {
+  webmSrc: string;
+  mp4Src: string;
+  fallbackSrc: string;
+  width: number;
+  height: number;
+  alt: string;
+  className?: string;
+}
+
+interface FeatureCardProps {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface CTASectionProps {
+  title: string;
+  href: string;
+  className?: string;
+}
+
+const DynamicAnimatedVideo = dynamic<AnimatedVideoProps>(() => import('@/components/AnimatedVideo'), {
+  ssr: false,
+  loading: () => <div className="w-full aspect-video animate-pulse bg-gray-800 rounded" />
+});
+
+const DynamicFeatureCard = dynamic<FeatureCardProps>(() => import('@/components/FeatureCard'), {
+  ssr: false,
+  loading: () => <div className="w-full h-24 animate-pulse bg-gray-800 rounded" />
+});
+
+const DynamicCTASection = dynamic<CTASectionProps>(() => import('@/components/CTASection'), {
+  ssr: false,
+  loading: () => <div className="w-full h-24 animate-pulse bg-gray-800 rounded" />
+});
+
+// Force static generation for this page
+export const metadata = {
+  dynamic: 'force-static',
+};
 
 export default function Home() {
   return (
@@ -11,21 +51,38 @@ export default function Home() {
       <section className="section-hero pt-24">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-8">Specification Management Software</h1>
+            <h1 
+              className="text-h1 mb-8 font-optimization-critical font-display antialiased"
+              suppressHydrationWarning
+              style={{
+                textRendering: 'optimizeLegibility',
+                WebkitFontSmoothing: 'antialiased',
+                MozOsxFontSmoothing: 'grayscale'
+              }}
+            >
+              Specification Management Software
+            </h1>
             <p className="text-body mb-12 mx-auto max-w-2xl">
               The automated reasoning toolset creates error free code from provable specifications. 
               Specify4IT™ is an innovative product conceived, designed and built specifically for developers 
               who want to create relational database software right first time.
             </p>
             <div className="relative mb-16">
-              <Image
-                src="/images/Connections-1.gif"
-                alt="Specify4IT Demo"
-                width={800}
-                height={450}
-                priority
-                className="w-full h-auto shadow-glow rounded-lg mx-auto"
-              />
+              <Suspense
+                fallback={
+                  <div className="w-full aspect-video animate-pulse bg-gray-800 rounded" />
+                }
+              >
+                <DynamicAnimatedVideo
+                  webmSrc="/videos/Connections-1.webm"
+                  mp4Src="/videos/Connections-1.mp4"
+                  fallbackSrc="/images/Connections-1.gif"
+                  width={1600}
+                  height={900}
+                  alt="Specify4IT Demo"
+                  className="w-full shadow-glow rounded-lg mx-auto aspect-video"
+                />
+              </Suspense>
             </div>
             <div className="max-w-3xl mx-auto">
               <p className="text-body mb-8">
@@ -48,7 +105,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <CTASection 
+      <DynamicCTASection 
         title="Get in touch today to find out more"
         href="mailto:tim.warren@specify4it.com?subject=Interest%20in%20Specify4IT"
       />
@@ -58,7 +115,7 @@ export default function Home() {
         <div className="container">
           <h2 className="text-h2 text-center mb-16">Why Specify4IT?</h2>
           <div className="max-w-3xl mx-auto mb-16">
-            <h4 className="text-h4 mb-6">Create code without error</h4>
+            <h3 className="text-h3 mb-6">Create code without error</h3>
             <p className="text-body mb-8">
               Creating "right first time" software for large modern programs is almost impossible, 
               and users are continually frustrated by needing to install patches and updates. 
@@ -74,22 +131,22 @@ export default function Home() {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <FeatureCard
+            <DynamicFeatureCard
               icon="/images/check.svg"
               title="Check"
               description="there are no conflicts"
             />
-            <FeatureCard
+            <DynamicFeatureCard
               icon="/images/animate.svg"
               title="Animate"
               description="user behaviour specification"
             />
-            <FeatureCard
+            <DynamicFeatureCard
               icon="/images/deduce.svg"
               title="Deduce"
               description="the customer requirements"
             />
-            <FeatureCard
+            <DynamicFeatureCard
               icon="/images/prove.svg"
               title="Prove"
               description="the application properties"
@@ -103,7 +160,7 @@ export default function Home() {
         <div className="container">
           <h2 className="text-h2 text-center mb-16">Our background</h2>
           <div className="max-w-3xl mx-auto">
-            <h4 className="text-h4 mb-6">A dedicated career</h4>
+            <h3 className="text-h3 mb-6">A dedicated career</h3>
             <p className="text-body mb-12">
               John Warren has spent his 50-year career dedicated to software engineering and specification, 
               resulting in him leading a successful consultancy, delivering projects to clients such as 
@@ -112,12 +169,14 @@ export default function Home() {
               of Defence, and Rio Tinto PLC.
             </p>
             <div className="relative">
-              <Image
-                src="/images/Connections-2-frame-1.png"
+              <DynamicAnimatedVideo
+                webmSrc="/videos/Connections-2.webm"
+                mp4Src="/videos/Connections-2.mp4"
+                fallbackSrc="/images/Connections-2-frame-1.png"
                 alt="Connections Visualization"
-                width={800}
-                height={450}
-                className="w-full h-auto shadow-glow rounded-lg mx-auto"
+                width={1080}
+                height={1080}
+                className="w-full h-auto rounded-lg shadow-lg"
               />
             </div>
           </div>
