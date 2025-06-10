@@ -25,12 +25,30 @@ export function middleware(request: NextRequest) {
     response.headers.set(key, value);
   });
 
-  // Cache static assets
-  if (request.nextUrl.pathname.match(/\.(jpg|jpeg|png|webp|avif|gif|ico)$/)) {
+  // Set appropriate cache headers based on content type
+  const pathname = request.nextUrl.pathname;
+  
+  if (pathname.match(/\.(jpg|jpeg|png|webp|avif|gif|ico)$/)) {
+    // Static assets - long term caching
     response.headers.set('Cache-Control', 'public, max-age=31536000, immutable');
-  } else {
-    // Enable bfcache for HTML pages
+  } else if (pathname.match(/\.(js|css)$/)) {
+    // JavaScript and CSS files
+    response.headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+  } else if (pathname.startsWith('/_next/data/')) {
+    // Next.js data files
     response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate');
+    response.headers.delete('Cache-Control');
+  } else if (!pathname.includes('api')) {
+    // HTML pages - enable bfcache
+    response.headers.set('Cache-Control', 'no-cache, no-store, max-age=0, must-revalidate');
+  }
+
+  // Ensure no-store is not set for static assets
+  if (response.headers.get('Cache-Control')?.includes('no-store')) {
+    const isStatic = pathname.match(/\.(jpg|jpeg|png|webp|avif|gif|ico|js|css)$/);
+    if (isStatic) {
+      response.headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+    }
   }
 
   return response;
