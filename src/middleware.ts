@@ -28,6 +28,9 @@ export function middleware(request: NextRequest) {
   // Cache static assets
   if (request.nextUrl.pathname.match(/\.(jpg|jpeg|png|webp|avif|gif|ico)$/)) {
     response.headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+  } else {
+    // Enable bfcache for HTML pages
+    response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate');
   }
 
   return response;

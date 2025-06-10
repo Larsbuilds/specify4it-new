@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { AnimatedVideo } from '@/components/AnimatedVideo';
 import FeatureCard from '@/components/FeatureCard';
 import CTASection from '@/components/CTASection';
 
@@ -112,12 +113,14 @@ export default function Home() {
               of Defence, and Rio Tinto PLC.
             </p>
             <div className="relative">
-              <Image
-                src="/images/Connections-2-frame-1.png"
+              <AnimatedVideo
+                webmSrc="/videos/Connections-2.webm"
+                mp4Src="/videos/Connections-2.mp4"
+                fallbackSrc="/images/Connections-2-frame-1.png"
                 alt="Connections Visualization"
-                width={800}
-                height={450}
-                className="w-full h-auto shadow-glow rounded-lg mx-auto"
+                width={1080}
+                height={1080}
+                className="w-full h-auto rounded-lg shadow-lg"
               />
             </div>
           </div>
