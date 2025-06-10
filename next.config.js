@@ -7,7 +7,7 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
   images: {
-    formats: ['image/webp', 'image/avif'],
+    formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
     minimumCacheTTL: 31536000,
@@ -17,14 +17,14 @@ const nextConfig = {
   },
   experimental: {
     scrollRestoration: true,
-    optimizePackageImports: ['@heroicons/react'],
+    optimizePackageImports: ['lucide-react'],
     optimizeCss: true,
     webpackBuildWorker: true,
+    swcMinify: true,
+    optimizeServerReact: true,
     serverActions: {
       allowedOrigins: ['localhost:3000'],
     },
-    browsersListForSwc: true,
-    legacyBrowsers: false,
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',

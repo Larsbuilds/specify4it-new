@@ -34,11 +34,7 @@ export function middleware(request: NextRequest) {
   } else if (pathname.match(/\.(js|css)$/)) {
     // JavaScript and CSS files
     response.headers.set('Cache-Control', 'public, max-age=31536000, immutable');
-  } else if (pathname.startsWith('/_next/data/')) {
-    // Next.js data files
-    response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate');
-    response.headers.delete('Cache-Control');
-  } else if (!pathname.includes('api')) {
+  } else if (!pathname.includes('api') && !pathname.includes('_next')) {
     // HTML pages - enable bfcache
     response.headers.set('Cache-Control', 'no-cache, no-store, max-age=0, must-revalidate');
   }
@@ -57,6 +53,6 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     '/en/:path*',
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    '/((?!api|_next/static|_next/image|_next/data|favicon.ico).*)',
   ],
 }

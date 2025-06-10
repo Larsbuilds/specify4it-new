@@ -11,6 +11,8 @@ const spaceMono = Space_Mono({
   weight: ["400", "700"],
   display: "swap",
   variable: "--font-space-mono",
+  preload: true,
+  fallback: ["system-ui", "arial"],
 });
 
 const zenDots = Zen_Dots({
@@ -18,6 +20,8 @@ const zenDots = Zen_Dots({
   weight: "400",
   display: "swap",
   variable: "--font-zen-dots",
+  preload: true,
+  fallback: ["system-ui", "arial"],
 });
 
 export const metadata: Metadata = {
@@ -61,12 +65,12 @@ export default function RootLayout({
         <main className="flex-grow pt-[64px] md:pt-[80px]">{children}</main>
         <Footer />
         <Script
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
         />
         <Script
           id="gtag-init"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];

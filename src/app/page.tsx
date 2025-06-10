@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { AnimatedVideo } from '@/components/AnimatedVideo';
-import FeatureCard from '@/components/FeatureCard';
-import CTASection from '@/components/CTASection';
+import { DynamicFeatureCard, DynamicCTASection } from '@/utils/dynamicImports';
 
 export const dynamic = 'force-static';
 
@@ -19,12 +18,13 @@ export default function Home() {
               who want to create relational database software right first time.
             </p>
             <div className="relative mb-16">
-              <Image
-                src="/images/Connections-1.gif"
-                alt="Specify4IT Demo"
+              <AnimatedVideo
+                webmSrc="/videos/Connections-1.webm"
+                mp4Src="/videos/Connections-1.mp4"
+                fallbackSrc="/images/Connections-1.gif"
                 width={800}
                 height={450}
-                priority
+                alt="Specify4IT Demo"
                 className="w-full h-auto shadow-glow rounded-lg mx-auto"
               />
             </div>
@@ -49,7 +49,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <CTASection 
+      <DynamicCTASection 
         title="Get in touch today to find out more"
         href="mailto:tim.warren@specify4it.com?subject=Interest%20in%20Specify4IT"
       />
@@ -75,22 +75,22 @@ export default function Home() {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <FeatureCard
+            <DynamicFeatureCard
               icon="/images/check.svg"
               title="Check"
               description="there are no conflicts"
             />
-            <FeatureCard
+            <DynamicFeatureCard
               icon="/images/animate.svg"
               title="Animate"
               description="user behaviour specification"
             />
-            <FeatureCard
+            <DynamicFeatureCard
               icon="/images/deduce.svg"
               title="Deduce"
               description="the customer requirements"
             />
-            <FeatureCard
+            <DynamicFeatureCard
               icon="/images/prove.svg"
               title="Prove"
               description="the application properties"

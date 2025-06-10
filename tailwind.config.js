@@ -1,10 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    mode: 'jit',
-    darkMode: ['class'],
     content: [
-    './src/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+      './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+      './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+      './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    ],
+    darkMode: ['class'],
     future: {
       removeDeprecatedGapUtilities: true,
       purgeLayersByDefault: true,
