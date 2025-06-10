@@ -3,84 +3,98 @@ const TerserPlugin = require('terser-webpack-plugin');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
+  reactStrictMode: true,
   swcMinify: true,
-  compress: true,
   poweredByHeader: false,
   images: {
-    formats: ['image/webp', 'image/avif'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256],
-    minimumCacheTTL: 31536000,
-    dangerouslyAllowSVG: true,
-    contentDispositionType: 'attachment',
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
   experimental: {
-    scrollRestoration: true,
-    optimizePackageImports: ['@heroicons/react'],
     optimizeCss: true,
-    webpackBuildWorker: true,
+    optimizePackageImports: ['@heroicons/react', 'lucide-react'],
     serverActions: {
-      allowedOrigins: ['localhost:3000'],
-    },
+      bodySizeLimit: '2mb'
+    }
   },
+  // Include static assets in standalone build
+  outputFileTracing: true,
+  transpilePackages: ['@heroicons/react', 'lucide-react'],
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
+    removeConsole: process.env.NODE_ENV === 'production'
   },
   webpack: (config, { dev, isServer }) => {
-    if (!dev && !isServer) {
-      // Production optimizations
-      config.optimization.moduleIds = 'deterministic';
-      config.optimization.concatenateModules = true;
-      config.optimization.minimize = true;
-      config.optimization.splitChunks = {
+    // Use non-eval source maps
+    if (dev) {
+      config.devtool = 'source-map';
+    }
+
+    // Optimize for production
+    config.optimization = {
+      ...config.optimization,
+      moduleIds: 'deterministic',
+      chunkIds: 'deterministic',
+      splitChunks: {
+        ...config.optimization.splitChunks,
         chunks: 'all',
-        minSize: 20000,
-        maxSize: 100000,
         cacheGroups: {
-          defaultVendors: {
-            test: /[\\/]node_modules[\\/]/,
-            priority: -10,
-            reuseExistingChunk: true,
-          },
-          default: {
-            minChunks: 2,
-            priority: -20,
-            reuseExistingChunk: true,
+          ...config.optimization.splitChunks.cacheGroups,
+          vendors: false,
+          default: false,
+          framework: {
+            chunks: 'all',
+            name: 'framework',
+            test: /[\\/]node_modules[\\/](@vercel\/analytics|react|react-dom|scheduler|prop-types|use-subscription)[\\/-]/,
+            priority: 40,
+            enforce: true,
           },
         },
-      };
+      },
+    };
+    
+    // Production optimizations
+    if (!dev && !isServer) {
+      config.optimization.minimize = true;
       config.optimization.minimizer = [
         ...config.optimization.minimizer || [],
         new TerserPlugin({
           terserOptions: {
+            parse: { ecma: 2020 },
             compress: {
-              drop_console: true,
-              pure_funcs: ['console.log'],
-              unused: true,
-              dead_code: true,
-              passes: 2,
+              ecma: 5,
+              warnings: false,
+              comparisons: false,
+              inline: 2,
+              module: true,
+              reduce_vars: true,
+              pure_getters: true,
+              unsafe_math: true,
+              passes: 3,
+              pure_funcs: [
+                'console.log',
+                'console.info',
+                'console.debug',
+                'console.warn'
+              ]
             },
-            mangle: true,
-            format: {
+            mangle: { safari10: true },
+            output: {
+              ecma: 5,
               comments: false,
+              ascii_only: true,
             },
           },
-        }),
+          parallel: true,
+        })
       ];
     }
-
-    // Modern JavaScript output
-    if (!dev && !isServer) {
-      config.target = ['web', 'es2017'];
-    }
-
+    
     return config;
-  },
-  // Enable HTTP/2 push
-  httpAgentOptions: {
-    keepAlive: true,
   }
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

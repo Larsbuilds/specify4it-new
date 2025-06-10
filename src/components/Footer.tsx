@@ -13,7 +13,7 @@ export default function Footer() {
                 alt="Specify4IT"
                 width={150}
                 height={35}
-                className="h-8 md:h-10 w-auto"
+                className="h-8 md:h-10 w-auto object-contain"
               />
             </Link>
           </div>

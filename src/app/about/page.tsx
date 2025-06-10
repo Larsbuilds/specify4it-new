@@ -18,7 +18,7 @@ export default function AboutPage() {
                 width={800}
                 height={450}
                 priority
-                className="w-full h-auto shadow-glow rounded-lg mx-auto"
+                className="w-full h-auto shadow-glow rounded-lg mx-auto object-contain"
               />
             </div>
           </div>

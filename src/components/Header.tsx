@@ -43,7 +43,7 @@ export default function Header() {
               width={180}
               height={40}
               priority
-              className="h-8 md:h-10 w-auto"
+              className="h-8 md:h-10 w-auto object-contain"
             />
           </Link>
           
@@ -107,7 +107,7 @@ export default function Header() {
                       </NavigationMenuLink>
 
                       <div className="mt-4">
-                        <h4 className="mb-2 text-sm font-medium text-blue-400">Selected Publications</h4>
+                        <h3 className="mb-2 text-sm font-medium text-blue-400">Selected Publications</h3>
                         <ul className="grid gap-2 text-sm text-muted-foreground">
                           <li>
                             <Link href="https://www.researchgate.net/publication/302370252_A_Rigorous_Specification_Technique_for_High_Quality_Software" className="hover:text-white transition-colors">
