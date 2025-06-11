@@ -29,11 +29,12 @@ const inter = Inter({
 const zenDots = Zen_Dots({
   subsets: ["latin"],
   weight: "400",
-  display: "optional",
+  display: "swap",
   preload: true,
   fallback: ["Arial Black", "Arial", "sans-serif"],
   variable: "--font-zen-dots",
-  adjustFontFallback: true
+  adjustFontFallback: true,
+  preloadOnly: false
 });
 
 export async function generateMetadata() {
@@ -105,6 +106,13 @@ export default function RootLayout({
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/_next/static/media/zen-dots-latin-400-normal.woff2"
+          as="font"
+          type="font/woff2"
           crossOrigin="anonymous"
         />
         <style

@@ -13,13 +13,19 @@ const nextConfig = {
         hostname: '**',
       },
     ],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256],
+    formats: ['image/webp'],
+    minimumCacheTTL: 31536000,
   },
   experimental: {
     optimizeCss: true,
     optimizePackageImports: ['@heroicons/react', 'lucide-react'],
     serverActions: {
       bodySizeLimit: '2mb'
-    }
+    },
+    webVitalsAttribution: ['CLS', 'LCP', 'FCP', 'FID', 'TTFB'],
+    optimisticClientCache: true,
   },
   // Include static assets in standalone build
   outputFileTracing: true,

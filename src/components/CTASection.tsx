@@ -6,16 +6,21 @@ interface CTASectionProps {
   className?: string;
 }
 
-export default function CTASection({ title, href, className = '' }: CTASectionProps) {
+export default function CTASection({ href, title }: CTASectionProps) {
   return (
-    <section className={`py-24 text-center ${className}`}>
-      <Link 
-        href={href}
-        className="inline-block hover:opacity-80 transition-opacity"
-      >
-        <h2 className="text-h2 mb-4">{title}</h2>
-        <p className="text-body">Get in touch today to find out more</p>
-      </Link>
+    <section className="bg-darkBlue border border-brandBlue/20 flex justify-between items-center p-12 mt-48">
+      <h2 className="font-display text-[42px] tracking-[0.15em] leading-none">
+        {title.toUpperCase()}<br />
+        <span className="text-brandBlue">TO FIND OUT MORE</span>
+      </h2>
+      <div className="border border-white/20 px-4 py-2">
+        <Link
+          href={href}
+          className="text-[13px] tracking-[0.25em] hover:opacity-80 transition-opacity"
+        >
+          CONTACT US
+        </Link>
+      </div>
     </section>
   );
 }
