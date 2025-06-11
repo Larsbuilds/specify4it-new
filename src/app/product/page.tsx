@@ -4,7 +4,8 @@ import Image from "next/image";
 import { Accordion as ProductAccordion, AccordionItem as ProductAccordionItem, AccordionTrigger as ProductAccordionTrigger, AccordionContent as ProductAccordionContent } from "@/components/ProductAccordion";
 import CTASection from '@/components/CTASection';
 import { ProductSection } from '@/components/ProductSection';
-import { motion, type Variants } from 'framer-motion';
+import { motion, HTMLMotionProps, Variants } from 'framer-motion'
+type MotionDivProps = HTMLMotionProps<"div">;
 
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 40 },

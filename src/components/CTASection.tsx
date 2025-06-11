@@ -6,11 +6,11 @@ interface CTASectionProps {
   className?: string;
 }
 
-export default function CTASection({ href }: { href: string }) {
+export default function CTASection({ href, title }: CTASectionProps) {
   return (
     <section className="bg-darkBlue border border-brandBlue/20 flex justify-between items-center p-12 mt-48">
       <h2 className="font-display text-[42px] tracking-[0.15em] leading-none">
-        GET IN TOUCH TODAY<br />
+        {title.toUpperCase()}<br />
         <span className="text-brandBlue">TO FIND OUT MORE</span>
       </h2>
       <div className="border border-white/20 px-4 py-2">
