@@ -29,7 +29,7 @@ const inter = Inter({
 const zenDots = Zen_Dots({
   subsets: ["latin"],
   weight: "400",
-  display: "optional",
+  display: "swap",
   preload: true,
   fallback: ["Arial Black", "Arial", "sans-serif"],
   variable: "--font-zen-dots",
