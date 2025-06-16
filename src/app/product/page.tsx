@@ -4,6 +4,8 @@ import Image from "next/image";
 import { Accordion as ProductAccordion, AccordionItem as ProductAccordionItem, AccordionTrigger as ProductAccordionTrigger, AccordionContent as ProductAccordionContent } from "@/components/ProductAccordion";
 import CTASection from '@/components/CTASection';
 import { ProductSection } from '@/components/ProductSection';
+import { USPSection } from "@/components/USPSection";
+import { TestimonialSection } from "@/components/TestimonialSection";
 import { motion, HTMLMotionProps, Variants } from 'framer-motion'
 type MotionDivProps = HTMLMotionProps<"div">;
 
@@ -24,9 +26,9 @@ export const revalidate = 3600; // Revalidate every hour
 
 export default function ProductPage() {
   return (
-    <div className="mt-[70px] px-[3.1rem] md:px-16 overflow-x-hidden scrollbar-none bg-[#040414] bg-[url('/images/grids.svg')] bg-[-7.2rem_top]">
+    <div className="mt-[70px] px-[3.1rem] md:px-16 overflow-x-hidden scrollbar-none bg-[#040414] bg-[url('/images/grids.svg')] bg-[center_top] bg-repeat">
       <motion.div
-        className="intro flex flex-col gap-12 my-12 mb-24 md:max-w-[75%] max-w-full"
+        className="intro flex flex-col gap-14 my-16 mb-32 md:max-w-[75%] max-w-full"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
@@ -49,7 +51,7 @@ export default function ProductPage() {
 
       <motion.div
         {...{
-          className: "why mb-24",
+          className: "why mb-32",
           initial: "hidden",
           whileInView: "visible",
           viewport: { once: true, amount: 0.3 },
@@ -69,7 +71,7 @@ export default function ProductPage() {
 
       <motion.div
         {...{
-          className: "deliver py-24",
+          className: "deliver py-32",
           initial: "hidden",
           whileInView: "visible",
           viewport: { once: true, amount: 0.3 },
@@ -118,58 +120,8 @@ export default function ProductPage() {
         </div>
       </motion.div>
 
-      <motion.div
-        className="benefits py-24 bg-[#040414]"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={fadeInUp}
-      >
-        <div className="px-8 md:px-12 xl:px-16">
-          <h2 className="text-[42px] font-[var(--font-zen-dots)] mb-4 pl-4">WHAT ARE THE BENEFITS?</h2>
-          <p className="text-lg text-body mb-16 pl-4">Time to deliver can be halved compared to conventional methods</p>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-            {/* Left column - Image */}
-            <div>
-              <Image
-                src="/images/graph.png"
-                width={800}
-                height={600}
-                alt="Benefits comparison graph"
-                className="w-full"
-                priority
-              />
-            </div>
-            
-            {/* Right column - Accordion */}
-            <div>
-              <h3 className="text-[32px] font-display text-brandBlue mb-6">In summary, Specify4IT enables:</h3>
-              <ProductAccordion type="single" defaultValue="item-1" className="w-full divide-y divide-brandBlue/20">
-                <ProductAccordionItem value="item-1" className="border-t border-brandBlue/20">
-                  <ProductAccordionTrigger>1. Improved productivity</ProductAccordionTrigger>
-                  <ProductAccordionContent>
-                    <p className="text-lg text-body">The creation of high-quality database software more quickly and with significantly reduced costs, resulting in improved productivity and profitability.</p>
-                  </ProductAccordionContent>
-                </ProductAccordionItem>
-                <ProductAccordionItem value="item-2">
-                  <ProductAccordionTrigger>2. Error free software</ProductAccordionTrigger>
-                  <ProductAccordionContent>
-                    <p className="text-lg text-body">The creation of error-free software through automated reasoning and testing, reducing the need for manual testing and debugging.</p>
-                  </ProductAccordionContent>
-                </ProductAccordionItem>
-                <ProductAccordionItem value="item-3">
-                  <ProductAccordionTrigger>3. Halving the time</ProductAccordionTrigger>
-                  <ProductAccordionContent>
-                    <p className="text-lg text-body">We estimate that database projects created using Specify4IT will only require half the staff for half the time to achieve successful delivery, compared to a conventional approach.</p>
-                  </ProductAccordionContent>
-                </ProductAccordionItem>
-              </ProductAccordion>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-
+      <USPSection />
+      <TestimonialSection />
       <ProductSection />
       <CTASection 
         title="Get in touch today"

@@ -1,6 +1,14 @@
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
+import { MotionWrapper } from '@/components/MotionWrapper';
+import { Zen_Dots } from 'next/font/google';
+
+const zenDots = Zen_Dots({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 interface AnimatedVideoProps {
   webmSrc: string;
@@ -46,64 +54,102 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <div className="space-y-24">
-      {/* Hero Section */}
-      <section className="section-hero pt-24">
-        <div className="container">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 
-              className="text-h1 mb-8 font-optimization-critical font-display antialiased"
-              suppressHydrationWarning
-              style={{
-                textRendering: 'optimizeLegibility',
-                WebkitFontSmoothing: 'antialiased',
-                MozOsxFontSmoothing: 'grayscale'
-              }}
-            >
-              Specification Management Software
-            </h1>
-            <p className="text-body mb-12 mx-auto max-w-2xl">
-              The automated reasoning toolset creates error free code from provable specifications. 
-              Specify4IT™ is an innovative product conceived, designed and built specifically for developers 
-              who want to create relational database software right first time.
-            </p>
-            <div className="relative mb-16">
-              <Suspense
-                fallback={
-                  <div className="w-full aspect-video animate-pulse bg-gray-800 rounded" />
-                }
-              >
-                <DynamicAnimatedVideo
-                  webmSrc="/videos/Connections-1.webm"
-                  mp4Src="/videos/Connections-1.mp4"
-                  fallbackSrc="/images/Connections-1.gif"
-                  width={1600}
-                  height={900}
-                  alt="Specify4IT Demo"
-                  className="w-full shadow-glow rounded-lg mx-auto aspect-video"
-                />
-              </Suspense>
+    <main className="flex flex-col min-h-screen bg-darkBlue">
+      <section className="flex flex-col gap-12 my-12 md:my-12 lg:my-24 max-w-[75%] mx-auto overflow-hidden">
+        <div className="w-full">
+          <div className="w-full">
+            <div className="relative">
+              <div className="w-full">
+                <MotionWrapper
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.6,
+                    ease: [0.16, 1, 0.3, 1]
+                  }}
+                  className="font-display antialiased max-w-[1400px]"
+                  suppressHydrationWarning
+                  style={{
+                    textRendering: 'optimizeLegibility',
+                    WebkitFontSmoothing: 'antialiased',
+                    MozOsxFontSmoothing: 'grayscale'
+                  }}
+                >
+                  <h1 className={`text-[62px] leading-[1.1] tracking-[-0.02em] text-left ${zenDots.className}`}>
+                    <span className="block text-white">Innovative technology.</span>
+                    <span className="block text-brandBlue mb-4">A powerful new</span>
+                    <span className="block text-brandBlue">software solution.</span>
+                  </h1>
+                </MotionWrapper>
+                <MotionWrapper 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 0.2,
+                    ease: [0.16, 1, 0.3, 1]
+                  }}
+                  className="text-xl sm:text-2xl lg:text-3xl leading-relaxed max-w-3xl text-white/80 mt-12 lg:mt-16"
+                >
+                  The Specify4IT automated reasoning toolset creates error free code from provable specifications. 
+                  Specify4IT™ is an innovative product conceived, designed and built specifically for developers 
+                  who want to create relational database software right first time.
+                </MotionWrapper>
+              </div>
             </div>
-            <div className="max-w-3xl mx-auto">
-              <p className="text-body mb-8">
-                This automated toolset enables a user to specify software in a structured way, 
-                resulting in provable specifications that can be checked and animated prior to 
-                generating any code. As the specifications are created mathematically using 
-                axiomatic reasoning, the subsequent code generation can be done automatically in minutes.
-              </p>
-              <p className="text-body mb-8">
-                The result of this is error-free code, created at the click of a button; 
-                estimated to take half the time and with half the workforce of conventional methods.
-              </p>
-              <p className="text-body">
-                This impressive technology has been developed by leading technology expert John Warren, 
-                whose work over 35 years has created a new method called "provable specification".
-              </p>
+          </div>
+
+          <div className="w-full">
+            <div className="relative -mx-4 sm:-mx-6 lg:-mx-8">
+              <div className="max-w-[2000px] mx-auto">
+                <Suspense
+                  fallback={
+                    <div className="w-full aspect-video animate-pulse bg-gray-800 rounded-none sm:rounded-lg" />
+                  }
+                >
+                  <DynamicAnimatedVideo
+                    webmSrc="/videos/Connections-1.webm"
+                    mp4Src="/videos/Connections-1.mp4"
+                    fallbackSrc="/images/Connections-1.gif"
+                    width={1600}
+                    height={900}
+                    alt="Specify4IT Demo"
+                    className="w-full shadow-glow rounded-none sm:rounded-lg mx-auto aspect-video"
+                  />
+                </Suspense>
+              </div>
+            </div>
+          </div>
+
+          <div className="w-full mt-24">
+            <div className="relative -mx-4 sm:-mx-6 lg:-mx-8">
+              <div className="max-w-[2000px] mx-auto px-4 sm:px-6 lg:px-8">
+                <MotionWrapper
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  className="max-w-3xl mx-auto"
+                >
+                  <p className="text-body mb-8">
+                    This automated toolset enables a user to specify software in a structured way, 
+                    resulting in provable specifications that can be checked and animated prior to 
+                    generating any code. As the specifications are created mathematically using 
+                    axiomatic reasoning, the subsequent code generation can be done automatically in minutes.
+                  </p>
+                  <p className="text-body mb-8">
+                    The result of this is error-free code, created at the click of a button; 
+                    estimated to take half the time and with half the workforce of conventional methods.
+                  </p>
+                  <p className="text-body">
+                    This impressive technology has been developed by leading technology expert John Warren, 
+                    whose work over 35 years has created a new method called "provable specification".
+                  </p>
+                </MotionWrapper>
+              </div>
             </div>
           </div>
         </div>
       </section>
-
       {/* CTA Section */}
       <DynamicCTASection 
         title="Get in touch today to find out more"
@@ -111,8 +157,8 @@ export default function Home() {
       />
 
       {/* Why Section */}
-      <section className="py-24 bg-darkBlue/20 backdrop-blur-sm">
-        <div className="container">
+      <section className="py-32 bg-darkBlue/20 backdrop-blur-sm">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <h2 className="text-h2 text-center mb-16">Why Specify4IT?</h2>
           <div className="max-w-3xl mx-auto mb-16">
             <h3 className="text-h3 mb-6">Create code without error</h3>
@@ -156,8 +202,8 @@ export default function Home() {
       </section>
 
       {/* Background Section */}
-      <section className="py-24">
-        <div className="container">
+      <section className="py-32">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <h2 className="text-h2 text-center mb-16">Our background</h2>
           <div className="max-w-3xl mx-auto">
             <h3 className="text-h3 mb-6">A dedicated career</h3>
@@ -182,6 +228,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

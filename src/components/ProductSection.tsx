@@ -15,21 +15,21 @@ const containerVariants: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.4,
-      duration: 1.2,
-      ease: [0.16, 1, 0.3, 1]
+      duration: 0.4,
+      ease: [0.16, 1, 0.3, 1],
+      delayChildren: 0.1,
+      staggerChildren: 0.05
     }
   }
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 10 },
   visible: { 
     opacity: 1, 
     y: 0,
     transition: {
-      duration: 1.2,
+      duration: 0.3,
       ease: [0.16, 1, 0.3, 1]
     }
   }
@@ -62,36 +62,42 @@ The fact is that programming is a complex, labour-intensive and error-prone proc
 export function ProductSection() {
   return (
     <motion.div
-      {...{
-        className: "sectionr",
-        initial: "hidden",
-        whileInView: "visible",
-        viewport: { once: true, amount: 0.2 },
-        variants: containerVariants
-      } as MotionDivProps}
+      className="py-32"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
     >
-      <Accordion type="single" defaultValue="item-0" className="w-full divide-y divide-brandBlue/50">
-        {accordionData.map((accordionItem, index) => (
-          <motion.div
-            key={index}
-            {...{
-              variants: itemVariants
-            } as MotionDivProps}
+      <div className="px-8 md:px-12 xl:px-16">
+        <div className="bg-[#0A0B14] rounded-lg p-8">
+          <motion.h3 
+            className="text-[32px] font-display text-brandBlue mb-6"
+            variants={itemVariants}
           >
-              <AccordionItem
-                value={`item-${index}`}
-                className="mb-0 rounded-lg hover:bg-gray-50/5 transition-colors duration-200"
+            Why are existing methods inadequate?
+          </motion.h3>
+          <motion.h4 
+            className="text-[24px] font-[var(--font-space-mono)] text-white mb-8 normal-case tracking-[1.6px]"
+            variants={itemVariants}
+          >
+            Current challenges in software development:
+          </motion.h4>
+          <Accordion type="single" defaultValue="item-0" className="w-full divide-y divide-brandBlue/20">
+            {accordionData.map((accordionItem, index) => (
+              <motion.div 
+                key={index} 
+                variants={itemVariants}
               >
-                <AccordionTrigger className="hover:no-underline py-2 text-left">
-                  <h3 className="text-h3 font-display text-brandBlue">{accordionItem.title}</h3>
-                </AccordionTrigger>
-                <AccordionContent>
-                  <p className="text-body">{accordionItem.content}</p>
-                </AccordionContent>
-              </AccordionItem>
-            </motion.div>
-          ))}
-        </Accordion>
+                <AccordionItem value={`item-${index}`} className={index === 0 ? "border-t border-brandBlue/20" : ""}>
+                  <AccordionTrigger>{accordionItem.title}</AccordionTrigger>
+                  <AccordionContent>
+                    <p className="text-lg text-body">{accordionItem.content}</p>
+                  </AccordionContent>
+                </AccordionItem>
+              </motion.div>
+            ))}
+          </Accordion>
+        </div>
+      </div>
     </motion.div>
   );
 }

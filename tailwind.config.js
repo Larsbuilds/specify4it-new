@@ -34,6 +34,7 @@ module.exports = {
   	},
   	extend: {
   		fontFamily: {
+  			'zen-dots': ['var(--font-zen-dots)'],
   			mono: 'var(--font-space-mono)',
   			display: 'var(--font-zen-dots)'
   		},

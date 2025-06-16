@@ -1,5 +1,6 @@
 import { headers } from "next/headers";
-import { Space_Mono, Inter, Zen_Dots } from "next/font/google";
+import { Space_Mono, Inter } from "next/font/google";
+import { Zen_Dots } from 'next/font/google'
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
