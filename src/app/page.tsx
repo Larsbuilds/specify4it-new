@@ -39,11 +39,6 @@ const DynamicCTASection = dynamic<CTASectionProps>(() => import('@/components/CT
   loading: () => <div className="w-full h-24 animate-pulse bg-gray-800 rounded" />
 });
 
-// Force static generation for this page
-export const metadata = {
-  dynamic: 'force-static',
-};
-
 export default function Home() {
   return (
     <div className="space-y-24">

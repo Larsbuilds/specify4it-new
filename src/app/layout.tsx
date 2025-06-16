@@ -35,7 +35,6 @@ const zenDots = Zen_Dots({
 });
 
 export async function generateMetadata() {
-  const nonce = headers().get('x-nonce');
   return {
     title: "Specify4it - Next Generation API Documentation",
     description:
@@ -83,9 +82,6 @@ export async function generateMetadata() {
     },
     verification: {
       google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
-    },
-    other: {
-      'csp-nonce': nonce,
     },
   };
 }
