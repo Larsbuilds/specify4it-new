@@ -82,6 +82,9 @@ export async function generateMetadata() {
         "max-snippet": -1,
       },
     },
+    icons: {
+      icon: '/favicon.png',
+    },
     verification: {
       google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
     },
@@ -101,6 +104,8 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#040414" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="shortcut icon" type="image/png" href="/favicon.png" />
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
@@ -132,7 +137,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-darkBlue text-white antialiased font-optimization-critical">
+      <body className="min-h-screen flex flex-col text-white antialiased font-optimization-critical">
         <ErrorBoundary>
           <Header />
           <main className="flex-grow pt-[64px] md:pt-[80px]">{children}</main>

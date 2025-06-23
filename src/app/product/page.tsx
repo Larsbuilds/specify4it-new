@@ -26,7 +26,7 @@ export const revalidate = 3600; // Revalidate every hour
 
 export default function ProductPage() {
   return (
-    <div className="mt-[70px] px-[3.1rem] md:px-16 overflow-x-hidden scrollbar-none bg-[#040414] bg-[url('/images/grids.svg')] bg-[center_top] bg-repeat">
+    <div className="mt-[70px] px-[3.1rem] md:px-16 overflow-x-hidden scrollbar-none">
       <motion.div
         className="intro flex flex-col gap-14 my-16 mb-32 md:max-w-[75%] max-w-full"
         initial="hidden"

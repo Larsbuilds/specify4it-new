@@ -32,8 +32,25 @@ const components: { title: string; href: string; description: string }[] = [
 ];
 
 export default function Header() {
+  const [isScrolled, setIsScrolled] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-darkBlue/95 backdrop-blur-sm border-b border-darkBlue/30">
+    <div className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
+      <div className={`absolute inset-0 transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0'} bg-darkBlue/5 backdrop-blur-md`} />
+      <div className="relative">
       <div className="max-w-[1400px] mx-auto px-6">
         <div className="flex items-center h-[64px] md:h-[80px]">
           <Link href="/" className="mr-auto">
@@ -52,7 +69,7 @@ export default function Header() {
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="bg-transparent">THE PRODUCT</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="w-[400px] md:w-[500px] p-4 bg-darkBlue/95 backdrop-blur-sm border border-darkBlue/30 rounded-md">
+                  <div className="w-[400px] md:w-[500px] p-4 bg-darkBlue/5 backdrop-blur-md rounded-md">
                     <div className="grid gap-3 md:grid-cols-2">
                       {components.map((component) => (
                         <NavigationMenuLink
@@ -74,7 +91,7 @@ export default function Header() {
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="bg-transparent">ABOUT US</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="w-[500px] p-4 bg-darkBlue/95 backdrop-blur-sm border border-darkBlue/30 rounded-md">
+                  <div className="w-[500px] p-4 bg-darkBlue/5 backdrop-blur-md rounded-md">
                     <div className="grid gap-3">
                       <NavigationMenuLink
                         href="/about#mission"
@@ -147,6 +164,7 @@ export default function Header() {
             </NavigationMenuList>
           </NavigationMenu>
         </div>
+      </div>
       </div>
     </div>
   );

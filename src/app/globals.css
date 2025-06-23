@@ -66,12 +66,29 @@
   }
 
   body {
-    @apply bg-darkBlue text-white font-mono;
-    background: #040414 url('/images/grids.svg');
+    @apply text-white font-mono;
+    background: url('/background.svg') #040414;
     background-position-x: -7.2rem;
+    position: relative;
     overflow-x: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  body::before {
+    content: "";
+    border-radius: 674px;
+    background: #00A3D92B;
+    filter: blur(500px);
+    position: absolute;
+    width: 674px;
+    height: 674px;
+    flex-shrink: 0;
+    top: -337px;
+    right: -337px;
+    display: flex;
+    z-index: 0;
+    pointer-events: none;
   }
 
   h1 {

@@ -54,13 +54,9 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <main className="flex flex-col min-h-screen bg-darkBlue">
-      <section className="flex flex-col gap-12 my-12 md:my-12 lg:my-24 max-w-[75%] mx-auto overflow-hidden">
-        <div className="w-full">
-          <div className="w-full">
-            <div className="relative">
-              <div className="w-full">
-                <MotionWrapper
+    <main className="flex flex-col min-h-screen">
+      <section className="flex flex-col gap-12 my-12 md:my-12 lg:my-24 max-w-[75%] mx-auto overflow-hidden relative">
+        <MotionWrapper
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
@@ -95,13 +91,9 @@ export default function Home() {
                   Specify4IT™ is an innovative product conceived, designed and built specifically for developers 
                   who want to create relational database software right first time.
                 </MotionWrapper>
-              </div>
-            </div>
-          </div>
 
-          <div className="w-full">
-            <div className="relative -mx-4 sm:-mx-6 lg:-mx-8">
-              <div className="max-w-[2000px] mx-auto">
+                <div className="relative -mx-4 sm:-mx-6 lg:-mx-8 mt-12">
+                  <div className="max-w-[2000px] mx-auto">
                 <Suspense
                   fallback={
                     <div className="w-full aspect-video animate-pulse bg-gray-800 rounded-none sm:rounded-lg" />
@@ -117,13 +109,10 @@ export default function Home() {
                     className="w-full shadow-glow rounded-none sm:rounded-lg mx-auto aspect-video"
                   />
                 </Suspense>
-              </div>
-            </div>
-          </div>
+                  </div>
+                </div>
 
-          <div className="w-full mt-24">
-            <div className="relative -mx-4 sm:-mx-6 lg:-mx-8">
-              <div className="max-w-[2000px] mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="mt-24 px-4 sm:px-6 lg:px-8">
                 <MotionWrapper
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -146,9 +135,6 @@ export default function Home() {
                   </p>
                 </MotionWrapper>
               </div>
-            </div>
-          </div>
-        </div>
       </section>
       {/* CTA Section */}
       <DynamicCTASection 
@@ -157,7 +143,7 @@ export default function Home() {
       />
 
       {/* Why Section */}
-      <section className="py-32 bg-darkBlue/20 backdrop-blur-sm">
+      <section className="py-32 backdrop-blur-sm">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <h2 className="text-h2 text-center mb-16">Why Specify4IT?</h2>
           <div className="max-w-3xl mx-auto mb-16">
