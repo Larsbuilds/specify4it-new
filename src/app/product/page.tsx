@@ -34,7 +34,7 @@ export default function ProductPage() {
         viewport={{ once: true, amount: 0.3 }}
         variants={fadeInUp}
       >
-        <h1 className="font-[var(--font-zen-dots)] text-[62px] font-normal leading-normal normal-case tracking-[-0.02em]">
+        <h1 className="font-[var(--font-zen-dots)] text-[62px] leading-normal normal-case tracking-[-0.02em]">
           Create error free
           <span className="text-[#00A3D9] block">database</span>
           <span className="text-[#00A3D9] block">systems faster</span>
