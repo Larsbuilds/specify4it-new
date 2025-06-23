@@ -28,7 +28,7 @@ export default function ProductPage() {
   return (
     <div className="mt-[70px] px-[3.1rem] md:px-16 overflow-x-hidden scrollbar-none">
       <motion.div
-        className="intro flex flex-col gap-14 my-16 mb-32 md:max-w-[75%] max-w-full"
+        id="intro" className="intro flex flex-col gap-14 my-16 mb-32 md:max-w-[75%] max-w-full scroll-mt-32"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
@@ -51,7 +51,7 @@ export default function ProductPage() {
 
       <motion.div
         {...{
-          className: "why mb-32",
+          id: "why", className: "why mb-32 scroll-mt-32",
           initial: "hidden",
           whileInView: "visible",
           viewport: { once: true, amount: 0.3 },
@@ -71,7 +71,7 @@ export default function ProductPage() {
 
       <motion.div
         {...{
-          className: "deliver py-32",
+          id: "deliver", className: "deliver py-32 scroll-mt-32",
           initial: "hidden",
           whileInView: "visible",
           viewport: { once: true, amount: 0.3 },
@@ -120,9 +120,13 @@ export default function ProductPage() {
         </div>
       </motion.div>
 
-      <USPSection />
+      <div id="features" className="scroll-mt-32">
+        <USPSection />
+      </div>
       <TestimonialSection />
-      <ProductSection />
+      <div id="technical" className="scroll-mt-32">
+        <ProductSection />
+      </div>
       <CTASection 
         title="Get in touch today"
         href="mailto:tim.warren@specify4it.com?subject=Interest in &quot;Specify4IT&quot;"
