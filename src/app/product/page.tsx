@@ -26,9 +26,10 @@ export const revalidate = 3600; // Revalidate every hour
 
 export default function ProductPage() {
   return (
-    <div className="mt-[70px] px-[3.1rem] md:px-16 overflow-x-hidden scrollbar-none">
+    <main className="overflow-x-hidden scrollbar-none">
+      <div className="relative max-w-[1400px] mx-auto px-6">
       <motion.div
-        id="intro" className="intro flex flex-col gap-14 my-16 mb-32 md:max-w-[75%] max-w-full scroll-mt-32"
+        id="intro" className="flex flex-col gap-14 py-32 md:max-w-[75%] max-w-full scroll-mt-32"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
@@ -51,7 +52,7 @@ export default function ProductPage() {
 
       <motion.div
         {...{
-          id: "why", className: "why mb-32 scroll-mt-32",
+          id: "why", className: "py-32 scroll-mt-32",
           initial: "hidden",
           whileInView: "visible",
           viewport: { once: true, amount: 0.3 },
@@ -71,7 +72,7 @@ export default function ProductPage() {
 
       <motion.div
         {...{
-          id: "deliver", className: "deliver py-32 scroll-mt-32",
+          id: "deliver", className: "pb-32 scroll-mt-32",
           initial: "hidden",
           whileInView: "visible",
           viewport: { once: true, amount: 0.3 },
@@ -120,17 +121,25 @@ export default function ProductPage() {
         </div>
       </motion.div>
 
-      <div id="features" className="scroll-mt-32">
-        <USPSection />
-      </div>
-      <TestimonialSection />
-      <div id="technical" className="scroll-mt-32">
+      <section id="features" className="pb-32 scroll-mt-32">
+        <CTASection 
+          title="Ready to get started?"
+          href="mailto:tim.warren@specify4it.com?subject=Interest in &quot;Specify4IT&quot;"
+        />
+      </section>
+      <section className="pb-32">
+        <TestimonialSection />
+      </section>
+      <section id="technical" className="pb-32 scroll-mt-32">
         <ProductSection />
+      </section>
+      <section className="pb-32">
+        <CTASection 
+          title="Get in touch today"
+          href="mailto:tim.warren@specify4it.com?subject=Interest in &quot;Specify4IT&quot;"
+        />
+      </section>
       </div>
-      <CTASection 
-        title="Get in touch today"
-        href="mailto:tim.warren@specify4it.com?subject=Interest in &quot;Specify4IT&quot;"
-      />
-    </div>
+    </main>
   );
 }

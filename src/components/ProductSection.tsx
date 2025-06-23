@@ -62,7 +62,7 @@ The fact is that programming is a complex, labour-intensive and error-prone proc
 export function ProductSection() {
   return (
     <motion.div
-      className="py-32"
+      className="pb-32"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
