@@ -156,7 +156,7 @@ export default function Home() {
                   width={1600}
                   height={900}
                   alt="Specify4IT Demo"
-                  className="w-full shadow-glow rounded-none sm:rounded-lg mx-auto aspect-video"
+                  className="w-full rounded-none sm:rounded-lg mx-auto aspect-video"
                 />
               </Suspense>
             </div>
@@ -165,31 +165,43 @@ export default function Home() {
       </motion.section>
 
       <section className="mt-24 px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-3xl mx-auto"
-        >
-          <p className="text-body mb-8">
+        <div className="max-w-3xl mx-auto">
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="text-body mb-8"
+          >
             This automated toolset enables a user to specify software in a structured way, 
             resulting in provable specifications that can be checked and animated prior to 
             generating any code. As the specifications are created mathematically using 
             axiomatic reasoning, the subsequent code generation can be done automatically in minutes.
-          </p>
-          <p className="text-body mb-8">
+          </motion.p>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="text-body mb-8"
+          >
             The result of this is error-free code, created at the click of a button; 
             estimated to take half the time and with half the workforce of conventional methods.
-          </p>
-          <p className="text-body">
+          </motion.p>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="text-body"
+          >
             This impressive technology has been developed by leading technology expert John Warren, 
             whose work over 35 years has created a new method called "provable specification".
-          </p>
-        </motion.div>
+          </motion.p>
+        </div>
       </section>
       {/* CTA Section */}
-      <section>
+      <section className="pt-24">
         <Suspense fallback={<div className="w-full h-24 animate-pulse bg-gray-800 rounded" />}>
           <DynamicCTASection 
             title="Get in touch today to find out more"
@@ -204,39 +216,66 @@ export default function Home() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
-        variants={containerVariants}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <motion.h2 
             className="text-h2 text-center mb-16"
-            variants={itemVariants}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
             Why Specify4IT?
           </motion.h2>
-          <motion.div 
-            className="max-w-3xl mx-auto mb-16"
-            variants={itemVariants}
-          >
-            <h3 className="text-h3 mb-6">Create code without error</h3>
-            <p className="text-body mb-8">
+          <div className="max-w-3xl mx-auto mb-16">
+            <motion.h3 
+              className="text-h3 mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            >
+              Create code without error
+            </motion.h3>
+            <motion.p 
+              className="text-body mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            >
               Creating "right first time" software for large modern programs is almost impossible, 
               and users are continually frustrated by needing to install patches and updates. 
               This is not an easy issue to solve as modern programs and programming languages 
               are often too complex to be fully understood and checked by individual programmers. 
               Often clients cannot specify their needs clearly, precisely, and unambiguously, 
               making it difficult for the programmer to create code without errors.
-            </p>
-            <p className="text-body">
+            </motion.p>
+            <motion.p 
+              className="text-body"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
               Specify4IT creates error free database systems faster, mathematically provable, 
               in exact accordance with the required specifications.
-            </p>
-          </motion.div>
-          
+            </motion.p>
+          </div>
           <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
-            variants={containerVariants}
+            className="relative border border-[#00A3D9] p-12 sm:p-16 md:p-20 mt-16"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            <motion.div variants={itemVariants}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-16 gap-y-12">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            >
               <Suspense fallback={<div className="w-full h-24 animate-pulse bg-gray-800 rounded" />}>
                 <DynamicFeatureCard
                   icon="/images/check.svg"
@@ -245,7 +284,12 @@ export default function Home() {
                 />
               </Suspense>
             </motion.div>
-            <motion.div variants={itemVariants}>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 1.4, ease: [0.16, 1, 0.3, 1] }}
+            >
               <Suspense fallback={<div className="w-full h-24 animate-pulse bg-gray-800 rounded" />}>
                 <DynamicFeatureCard
                   icon="/images/animate.svg"
@@ -254,7 +298,12 @@ export default function Home() {
                 />
               </Suspense>
             </motion.div>
-            <motion.div variants={itemVariants}>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
+            >
               <Suspense fallback={<div className="w-full h-24 animate-pulse bg-gray-800 rounded" />}>
                 <DynamicFeatureCard
                   icon="/images/deduce.svg"
@@ -263,7 +312,12 @@ export default function Home() {
                 />
               </Suspense>
             </motion.div>
-            <motion.div variants={itemVariants}>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 1.8, ease: [0.16, 1, 0.3, 1] }}
+            >
               <Suspense fallback={<div className="w-full h-24 animate-pulse bg-gray-800 rounded" />}>
                 <DynamicFeatureCard
                   icon="/images/prove.svg"
@@ -272,6 +326,7 @@ export default function Home() {
                 />
               </Suspense>
             </motion.div>
+            </div>
           </motion.div>
         </div>
       </motion.section>

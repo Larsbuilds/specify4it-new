@@ -234,7 +234,7 @@ body {
   }
 
   .feature-card {
-    @apply p-6 rounded-lg bg-darkBlue/30 backdrop-blur-sm hover:bg-darkBlue/40 hover:shadow-glow transition-all duration-300;
+    @apply transition-transform duration-300;
   }
 
   .section-content {
