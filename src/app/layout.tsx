@@ -1,31 +1,10 @@
 import { headers } from "next/headers";
-import { Space_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Script from 'next/script';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
-import { zenDots } from './fonts';
-
-const spaceMono = Space_Mono({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  display: "swap",
-  preload: true,
-  fallback: ["Courier New", "monospace"],
-  variable: "--font-space-mono",
-  adjustFontFallback: true
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-  preload: true,
-  fallback: ["-apple-system", "BlinkMacSystemFont", "system-ui", "sans-serif"],
-  variable: "--font-inter",
-  adjustFontFallback: true
-});
+import { zenDots, spaceMono, inter } from './fonts';
 
 export async function generateMetadata() {
   const nonce = headers().get('x-nonce');
