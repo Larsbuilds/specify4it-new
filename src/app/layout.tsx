@@ -1,11 +1,11 @@
 import { headers } from "next/headers";
 import { Space_Mono, Inter } from "next/font/google";
-import { Zen_Dots } from 'next/font/google'
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Script from 'next/script';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
+import { zenDots } from './fonts';
 
 const spaceMono = Space_Mono({
   subsets: ["latin"],
@@ -25,14 +25,6 @@ const inter = Inter({
   fallback: ["-apple-system", "BlinkMacSystemFont", "system-ui", "sans-serif"],
   variable: "--font-inter",
   adjustFontFallback: true
-});
-
-const zenDots = Zen_Dots({
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-  preload: true,
-  variable: "--font-zen-dots"
 });
 
 export async function generateMetadata() {
@@ -117,20 +109,7 @@ export default function RootLayout({
         <style
           dangerouslySetInnerHTML={{
             __html: `
-              @font-face {
-                font-family: 'Space Mono';
-                font-style: normal;
-                font-weight: 400;
-                font-display: swap;
-                src: url('/_next/static/media/space-mono-latin-400-normal.woff2') format('woff2');
-              }
-              @font-face {
-                font-family: 'Space Mono';
-                font-style: normal;
-                font-weight: 700;
-                font-display: swap;
-                src: url('/_next/static/media/space-mono-latin-700-normal.woff2') format('woff2');
-              }
+              /* Font loading is handled by next/font/google */
               .font-optimization {
                 text-rendering: optimizeLegibility;
                 -webkit-font-smoothing: antialiased;
@@ -143,7 +122,7 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col text-white antialiased font-optimization-critical overflow-x-hidden">
         <ErrorBoundary>
           <Header />
-          <main className="flex-grow w-full max-w-[2000px] mx-auto px-4 sm:px-6 lg:px-8 pt-[64px] md:pt-[80px] overflow-x-hidden">{children}</main>
+          <main className="flex-grow w-full pt-[64px] md:pt-[80px] overflow-x-hidden">{children}</main>
           <Footer />
         </ErrorBoundary>
         <Script

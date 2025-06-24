@@ -53,11 +53,15 @@ const AnimatedVideo = ({
       <video
         className="w-full h-full"
         autoPlay
-        loop
         muted
         playsInline
         onError={() => setHasError(true)}
         onLoadedData={() => setIsLoading(false)}
+        onEnded={(e) => {
+          // Ensure video stays at the last frame
+          const video = e.currentTarget;
+          video.currentTime = video.duration;
+        }}
       >
         <source src={webmSrc} type="video/webm" />
         <source src={mp4Src} type="video/mp4" />

@@ -43,7 +43,7 @@ body {
     @apply text-3xl sm:text-4xl md:text-5xl lg:text-[62px] font-bold tracking-tight;
   }
   .text-responsive-h2 {
-    @apply text-3xl sm:text-4xl md:text-5xl font-bold;
+    @apply text-3xl sm:text-4xl md:text-5xl font-display tracking-wider;
   }
   .text-responsive-h3 {
     @apply text-2xl sm:text-3xl md:text-4xl font-semibold;

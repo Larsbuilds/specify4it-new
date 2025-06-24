@@ -54,6 +54,24 @@ export default function Header() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
+    // Handle scroll target if it exists
+    const scrollTarget = sessionStorage.getItem('scrollTarget');
+    if (scrollTarget) {
+      sessionStorage.removeItem('scrollTarget');
+      setTimeout(() => {
+        const element = document.getElementById(scrollTarget);
+        if (element) {
+          const headerOffset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 100); // Small delay to ensure the page is fully loaded
+    }
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -73,7 +91,15 @@ export default function Header() {
       <div className="relative">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-[64px] md:h-[80px]">
-            <Link href="/" className="relative z-10">
+            <Link 
+              href="/" 
+              className="relative z-10"
+              onClick={(e) => {
+                if (window.location.pathname === '/') {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }}>
               <Image
                 src="/images/specify4itlogo.svg"
                 alt="Specify4IT"
@@ -141,9 +167,19 @@ export default function Header() {
                               const [path, hash] = item.href.split('#');
                               if (window.location.pathname !== path) {
                                 window.location.href = item.href;
+                                // Store the target section in sessionStorage
+                                if (hash) sessionStorage.setItem('scrollTarget', hash);
                               } else {
                                 const element = document.getElementById(hash);
-                                element?.scrollIntoView({ behavior: 'smooth' });
+                                if (element) {
+                                  const headerOffset = 80; // Adjust based on your header height
+                                  const elementPosition = element.getBoundingClientRect().top;
+                                  const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                                  window.scrollTo({
+                                    top: offsetPosition,
+                                    behavior: 'smooth'
+                                  });
+                                }
                               }
                             }}
                             className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-brandBlue/10 focus:bg-brandBlue/10"

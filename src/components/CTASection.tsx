@@ -50,7 +50,7 @@ export default function CTASection({ href, title }: CTASectionProps) {
           className="flex-1 w-full sm:w-auto"
           variants={fadeInUp}
         >
-          <h2 className="font-[var(--font-zen-dots)] text-[42px] sm:text-[52px] md:text-[72px] leading-[1.1] text-white">
+          <h2 className="font-[var(--font-zen-dots)] text-[42px] sm:text-[52px] md:text-[62px] leading-[1.1] text-white">
             {title}
             <motion.span 
               className="block text-[#00A3D9] mt-2"
