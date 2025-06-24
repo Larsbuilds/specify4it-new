@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import Image from "next/image";
 import { Accordion as ProductAccordion, AccordionItem as ProductAccordionItem, AccordionTrigger as ProductAccordionTrigger, AccordionContent as ProductAccordionContent } from "@/components/ProductAccordion";
 import CTASection from '@/components/CTASection';
@@ -27,24 +28,24 @@ export const revalidate = 3600; // Revalidate every hour
 export default function ProductPage() {
   return (
     <main className="overflow-x-hidden scrollbar-none">
-      <div className="relative max-w-[1400px] mx-auto px-6">
+      <div className="container-2xl">
       <motion.div
-        id="intro" className="flex flex-col gap-14 py-32 md:max-w-[75%] max-w-full scroll-mt-32"
+        id="intro" className="flex flex-col gap-8 sm:gap-10 md:gap-14 py-16 sm:py-24 md:py-32 md:max-w-[75%] max-w-full scroll-mt-16 sm:scroll-mt-24 md:scroll-mt-32"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
         variants={fadeInUp}
       >
-        <h1 className="font-[var(--font-zen-dots)] text-[62px] leading-normal normal-case tracking-[-0.02em]">
+        <h1 className="font-[var(--font-zen-dots)] text-responsive-h1 leading-tight normal-case tracking-[-0.02em]">
           Create error free
           <span className="text-[#00A3D9] block">database</span>
           <span className="text-[#00A3D9] block">systems faster</span>
         </h1>
-        <h3 className="text-xl md:text-2xl font-normal">
+        <h3 className="text-responsive-body font-normal">
           a new and innovative axiomatic reasoning theory to create provable specifications.
         </h3>
         <a href="mailto:tim.warren@specify4it.com?subject=Interest in &quot;Specify4IT&quot;">
-          <button className="relative border-none text-white text-center font-['Space_Mono'] text-base font-bold leading-normal tracking-[1.6px] uppercase py-3 px-6 bg-transparent overflow-hidden box-border shadow-[inset_0px_0px_0px_1px_#fff] transition-all duration-500 ease hover:shadow-[inset_0px_0px_0px_1px_#00A3D9] hover:text-[#00A3D9] before:absolute before:content-[''] before:h-full before:w-1/4 before:bg-[#040414] before:blur-[23px] before:right-0 before:top-0 before:z-[4] before:transition-all before:duration-500 before:ease">
+          <button className="relative border-none text-white text-center font-[var(--font-space-mono)] text-base leading-normal tracking-[1.6px] uppercase py-3 px-6 bg-transparent overflow-hidden box-border shadow-[inset_0px_0px_0px_1px_#fff] transition-all duration-500 ease hover:shadow-[inset_0px_0px_0px_1px_#00A3D9] hover:text-[#00A3D9] before:absolute before:content-[''] before:h-full before:w-1/4 before:bg-[#040414] before:blur-[23px] before:right-0 before:top-0 before:z-[4] before:transition-all before:duration-500 before:ease">
             GET IN TOUCH
           </button>
         </a>
@@ -52,14 +53,14 @@ export default function ProductPage() {
 
       <motion.div
         {...{
-          id: "why", className: "py-32 scroll-mt-32",
+          id: "why", className: "py-16 sm:py-24 md:py-32 scroll-mt-16 sm:scroll-mt-24 md:scroll-mt-32",
           initial: "hidden",
           whileInView: "visible",
           viewport: { once: true, amount: 0.3 },
           variants: fadeInUp
         } as MotionDivProps}
       >
-        <h2 className="text-[42px] font-[var(--font-zen-dots)] mb-12">Why is Specify4IT needed?</h2>
+        <h2 className="text-responsive-h2 font-[var(--font-zen-dots)] mb-8 sm:mb-10 md:mb-12">Why is Specify4IT needed?</h2>
         <div className="whycontentholder">
           <div className="whycontent">
             <h3 className="text-[26px] font-[var(--font-zen-dots)] mb-4 text-brandBlue">Create code without error</h3>
@@ -72,7 +73,7 @@ export default function ProductPage() {
 
       <motion.div
         {...{
-          id: "deliver", className: "pb-32 scroll-mt-32",
+          id: "deliver", className: "pb-16 sm:pb-24 md:pb-32 scroll-mt-16 sm:scroll-mt-24 md:scroll-mt-32",
           initial: "hidden",
           whileInView: "visible",
           viewport: { once: true, amount: 0.3 },
@@ -83,7 +84,7 @@ export default function ProductPage() {
         <h3 className="text-2xl mb-12">
           Specify4IT creates <span className="text-[#00A3D9]">error free</span> database systems faster, mathematically provable, in exact accordance with the required specifications.
         </h3>
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid-responsive-cols-2 gap-8 sm:gap-10 md:gap-12">
           <div>
             <h3 className="text-[26px] font-[var(--font-zen-dots)] mb-4 text-brandBlue">Mathematical proof of correctness</h3>
             <p className="text-lg mb-6">

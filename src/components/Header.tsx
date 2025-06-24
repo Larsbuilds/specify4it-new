@@ -44,6 +44,7 @@ const productMenuItems: { title: string; href: string; description: string }[] =
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = React.useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -58,25 +59,46 @@ export default function Header() {
     };
   }, []);
 
+  React.useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isMobileMenuOpen]);
+
   return (
     <div className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
       <div className={`absolute inset-0 transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0'} bg-darkBlue/5 backdrop-blur-md`} />
       <div className="relative">
-        <div className="max-w-[1400px] mx-auto px-6">
-        <div className="flex items-center h-[64px] md:h-[80px]">
-          <Link href="/" className="mr-auto">
-            <Image
-              src="/images/specify4itlogo.svg"
-              alt="Specify4IT"
-              width={180}
-              height={40}
-              priority
-              className="h-8 md:h-10 w-auto object-contain"
-            />
-          </Link>
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-[64px] md:h-[80px]">
+            <Link href="/" className="relative z-10">
+              <Image
+                src="/images/specify4itlogo.svg"
+                alt="Specify4IT"
+                width={180}
+                height={40}
+                priority
+                className="h-8 md:h-10 w-auto object-contain"
+              />
+            </Link>
+
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="relative z-10 p-2 -mr-2 md:hidden"
+              aria-label="Toggle menu"
+            >
+              <div className="w-6 h-5 flex flex-col justify-between">
+                <span className={`w-full h-0.5 bg-white transform transition-transform duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+                <span className={`w-full h-0.5 bg-white transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`} />
+                <span className={`w-full h-0.5 bg-white transform transition-transform duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+              </div>
+            </button>
           
-          <NavigationMenu>
-            <NavigationMenuList className="flex gap-12">
+          <NavigationMenu className="hidden md:block">
+            <NavigationMenuList className="flex gap-8 lg:gap-12">
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="bg-transparent">THE PRODUCT</NavigationMenuTrigger>
                 <NavigationMenuContent>
@@ -111,8 +133,19 @@ export default function Header() {
                             }
                           }}
                         >
-                          <NavigationMenuLink
+                          <Link
                             href={item.href}
+                            scroll={false}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              const [path, hash] = item.href.split('#');
+                              if (window.location.pathname !== path) {
+                                window.location.href = item.href;
+                              } else {
+                                const element = document.getElementById(hash);
+                                element?.scrollIntoView({ behavior: 'smooth' });
+                              }
+                            }}
                             className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-brandBlue/10 focus:bg-brandBlue/10"
                           >
                             <motion.div 
@@ -131,7 +164,7 @@ export default function Header() {
                             <p className="line-clamp-2 text-sm leading-snug text-white/70">
                               {item.description}
                             </p>
-                          </NavigationMenuLink>
+                          </Link>
                         </motion.div>
                       ))}
                     </motion.div>
@@ -314,8 +347,31 @@ export default function Header() {
             </NavigationMenuList>
           </NavigationMenu>
         </div>
+
+        {/* Mobile menu overlay */}
+        <div
+          className={`fixed inset-0 bg-darkBlue/95 backdrop-blur-lg transition-opacity duration-300 md:hidden ${
+            isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+        >
+          <div className="h-full w-full flex flex-col pt-24 px-6 overflow-y-auto">
+            <nav className="space-y-8">
+              {productMenuItems.map((item) => (
+                <Link
+                  key={item.title}
+                  href={item.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block py-2 text-lg font-medium text-white hover:text-brandBlue transition-colors"
+                >
+                  <h3 className="text-xl mb-1">{item.title}</h3>
+                  <p className="text-sm text-gray-400">{item.description}</p>
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </div>
       </div>
-      </div>
+    </div>
     </div>
   );
 }

@@ -1,23 +1,61 @@
+'use client';
+
 import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
 
 const containerVariants: Variants = {
-  hidden: { opacity: 1 },
+  hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      delayChildren: 0.2,
-      staggerChildren: 0.1
+      delayChildren: 0.3,
+      staggerChildren: 0.4
     }
   }
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0 },
+  hidden: { 
+    opacity: 0,
+    y: 20,
+    scale: 0.95
+  },
   visible: {
     opacity: 1,
+    y: 0,
+    scale: 1,
     transition: {
-      duration: 0.4,
+      duration: 0.8,
+      ease: [0.16, 1, 0.3, 1]
+    }
+  }
+};
+
+const quoteVariants: Variants = {
+  hidden: { 
+    opacity: 0,
+    y: 15
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1]
+    }
+  }
+};
+
+const sourceVariants: Variants = {
+  hidden: { 
+    opacity: 0,
+    y: 10
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
       ease: [0.16, 1, 0.3, 1]
     }
   }
@@ -51,12 +89,18 @@ export function TestimonialSection() {
               className="flex flex-col"
               variants={itemVariants}
             >
-              <p className="text-[24px] font-[var(--font-space-mono)] text-white mb-6 leading-normal">
+              <motion.p 
+                className="text-[24px] font-[var(--font-space-mono)] text-white mb-6 leading-normal"
+                variants={quoteVariants}
+              >
                 "{item.quote}"
-              </p>
-              <p className="text-lg font-[var(--font-space-mono)] text-[#00B7E5] tracking-wide">
+              </motion.p>
+              <motion.p 
+                className="text-lg font-[var(--font-space-mono)] text-[#00B7E5] tracking-wide"
+                variants={sourceVariants}
+              >
                 {item.source}
-              </p>
+              </motion.p>
             </motion.div>
           ))}
         </motion.div>

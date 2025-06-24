@@ -1,13 +1,18 @@
+'use client';
+
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
-import { MotionWrapper } from '@/components/MotionWrapper';
+import { motion, Variants } from 'framer-motion';
 import { Zen_Dots } from 'next/font/google';
 
 const zenDots = Zen_Dots({
   weight: '400',
   subsets: ['latin'],
-  display: 'swap',
+  display: 'block',
+  preload: true,
+  fallback: ['Arial', 'sans-serif'],
+  adjustFontFallback: true,
 });
 
 interface AnimatedVideoProps {
@@ -47,106 +52,171 @@ const DynamicCTASection = dynamic<CTASectionProps>(() => import('@/components/CT
   loading: () => <div className="w-full h-24 animate-pulse bg-gray-800 rounded" />
 });
 
-// Force static generation for this page
-export const metadata = {
-  dynamic: 'force-static',
+const fadeInUp: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.16, 1, 0.3, 1]
+    }
+  }
+};
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.2,
+      staggerChildren: 0.15
+    }
+  }
+};
+
+const itemVariants: Variants = {
+  hidden: { 
+    opacity: 0, 
+    y: 20,
+    scale: 0.98
+  },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1]
+    }
+  }
 };
 
 export default function Home() {
   return (
-    <main className="flex flex-col min-h-screen">
-      <section className="flex flex-col gap-12 my-12 md:my-12 lg:my-24 max-w-[75%] mx-auto overflow-hidden relative">
-        <MotionWrapper
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.6,
-                    ease: [0.16, 1, 0.3, 1]
-                  }}
-                  className="font-display antialiased max-w-[1400px]"
-                  suppressHydrationWarning
-                  style={{
-                    textRendering: 'optimizeLegibility',
-                    WebkitFontSmoothing: 'antialiased',
-                    MozOsxFontSmoothing: 'grayscale'
-                  }}
-                >
-                  <h1 className={`text-[62px] leading-[1.1] tracking-[-0.02em] text-left ${zenDots.className}`}>
-                    <span className="block text-white">Innovative technology.</span>
-                    <span className="block text-brandBlue mb-4">A powerful new</span>
-                    <span className="block text-brandBlue">software solution.</span>
-                  </h1>
-                </MotionWrapper>
-                <MotionWrapper 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.6,
-                    delay: 0.2,
-                    ease: [0.16, 1, 0.3, 1]
-                  }}
-                  className="text-xl sm:text-2xl lg:text-3xl leading-relaxed max-w-3xl text-white/80 mt-12 lg:mt-16"
-                >
-                  The Specify4IT automated reasoning toolset creates error free code from provable specifications. 
-                  Specify4IT™ is an innovative product conceived, designed and built specifically for developers 
-                  who want to create relational database software right first time.
-                </MotionWrapper>
+    <main className="flex flex-col min-h-screen overflow-x-hidden">
+      <motion.section 
+        className="relative w-full"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: {},
+          visible: {
+            transition: {
+              staggerChildren: 0.15
+            }
+          }
+        }}
+      >
+        <div className="w-full max-w-[75%] mx-auto my-12 md:my-12 lg:my-24">
+          <motion.div
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { duration: 0.5 } }
+            }}
+            className="relative"
+          >
+            <div 
+              className="absolute inset-0 pointer-events-none select-none opacity-0"
+              aria-hidden="true"
+              style={{ fontFamily: 'Arial, sans-serif' }}
+            >
+              <h1 className="text-[62px] leading-[1.1] tracking-[-0.02em] text-left">
+                <span className="block text-white min-h-[1.1em]">Innovative technology.</span>
+                <span className="block text-brandBlue mb-4 min-h-[1.1em]">A powerful new</span>
+                <span className="block text-brandBlue min-h-[1.1em]">software solution.</span>
+              </h1>
+            </div>
+            <h1 className={`text-[62px] leading-[1.1] tracking-[-0.02em] text-left ${zenDots.className}`}>
+              <span className="block text-white min-h-[1.1em]">Innovative technology.</span>
+              <span className="block text-brandBlue mb-4 min-h-[1.1em]">A powerful new</span>
+              <span className="block text-brandBlue min-h-[1.1em]">software solution.</span>
+            </h1>
+          </motion.div>
+          <motion.p
+          className="text-xl sm:text-2xl lg:text-3xl leading-relaxed max-w-3xl text-white/80 mt-12 lg:mt-16"
+          variants={itemVariants}
+        >
+          The Specify4IT automated reasoning toolset creates error free code from provable specifications. 
+          Specify4IT™ is an innovative product conceived, designed and built specifically for developers 
+          who want to create relational database software right first time.
+        </motion.p>
 
-                <div className="relative -mx-4 sm:-mx-6 lg:-mx-8 mt-12">
-                  <div className="max-w-[2000px] mx-auto">
-                <Suspense
-                  fallback={
-                    <div className="w-full aspect-video animate-pulse bg-gray-800 rounded-none sm:rounded-lg" />
-                  }
-                >
-                  <DynamicAnimatedVideo
-                    webmSrc="/videos/Connections-1.webm"
-                    mp4Src="/videos/Connections-1.mp4"
-                    fallbackSrc="/images/Connections-1.gif"
-                    width={1600}
-                    height={900}
-                    alt="Specify4IT Demo"
-                    className="w-full shadow-glow rounded-none sm:rounded-lg mx-auto aspect-video"
-                  />
-                </Suspense>
-                  </div>
-                </div>
+          <div className="relative -mx-4 sm:-mx-6 lg:-mx-8 mt-12">
+            <div className="max-w-[2000px] mx-auto">
+              <Suspense
+                fallback={
+                  <div className="w-full aspect-video animate-pulse bg-gray-800 rounded-none sm:rounded-lg" />
+                }
+              >
+                <DynamicAnimatedVideo
+                  webmSrc="/videos/Connections-1.webm"
+                  mp4Src="/videos/Connections-1.mp4"
+                  fallbackSrc="/images/Connections-1.gif"
+                  width={1600}
+                  height={900}
+                  alt="Specify4IT Demo"
+                  className="w-full shadow-glow rounded-none sm:rounded-lg mx-auto aspect-video"
+                />
+              </Suspense>
+            </div>
+          </div>
+        </div>
+      </motion.section>
 
-                <div className="mt-24 px-4 sm:px-6 lg:px-8">
-                <MotionWrapper
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  className="max-w-3xl mx-auto"
-                >
-                  <p className="text-body mb-8">
-                    This automated toolset enables a user to specify software in a structured way, 
-                    resulting in provable specifications that can be checked and animated prior to 
-                    generating any code. As the specifications are created mathematically using 
-                    axiomatic reasoning, the subsequent code generation can be done automatically in minutes.
-                  </p>
-                  <p className="text-body mb-8">
-                    The result of this is error-free code, created at the click of a button; 
-                    estimated to take half the time and with half the workforce of conventional methods.
-                  </p>
-                  <p className="text-body">
-                    This impressive technology has been developed by leading technology expert John Warren, 
-                    whose work over 35 years has created a new method called "provable specification".
-                  </p>
-                </MotionWrapper>
-              </div>
+      <section className="mt-24 px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-3xl mx-auto"
+        >
+          <p className="text-body mb-8">
+            This automated toolset enables a user to specify software in a structured way, 
+            resulting in provable specifications that can be checked and animated prior to 
+            generating any code. As the specifications are created mathematically using 
+            axiomatic reasoning, the subsequent code generation can be done automatically in minutes.
+          </p>
+          <p className="text-body mb-8">
+            The result of this is error-free code, created at the click of a button; 
+            estimated to take half the time and with half the workforce of conventional methods.
+          </p>
+          <p className="text-body">
+            This impressive technology has been developed by leading technology expert John Warren, 
+            whose work over 35 years has created a new method called "provable specification".
+          </p>
+        </motion.div>
       </section>
       {/* CTA Section */}
-      <DynamicCTASection 
-        title="Get in touch today to find out more"
-        href="mailto:tim.warren@specify4it.com?subject=Interest%20in%20Specify4IT"
-      />
+      <section>
+        <Suspense fallback={<div className="w-full h-24 animate-pulse bg-gray-800 rounded" />}>
+          <DynamicCTASection 
+            title="Get in touch today to find out more"
+            href="mailto:tim.warren@specify4it.com?subject=Interest%20in%20Specify4IT"
+          />
+        </Suspense>
+      </section>
 
       {/* Why Section */}
-      <section className="py-32 backdrop-blur-sm">
+      <motion.section 
+        className="py-32 backdrop-blur-sm"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={containerVariants}
+      >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <h2 className="text-h2 text-center mb-16">Why Specify4IT?</h2>
-          <div className="max-w-3xl mx-auto mb-16">
+          <motion.h2 
+            className="text-h2 text-center mb-16"
+            variants={itemVariants}
+          >
+            Why Specify4IT?
+          </motion.h2>
+          <motion.div 
+            className="max-w-3xl mx-auto mb-16"
+            variants={itemVariants}
+          >
             <h3 className="text-h3 mb-6">Create code without error</h3>
             <p className="text-body mb-8">
               Creating "right first time" software for large modern programs is almost impossible, 
@@ -160,38 +230,71 @@ export default function Home() {
               Specify4IT creates error free database systems faster, mathematically provable, 
               in exact accordance with the required specifications.
             </p>
-          </div>
+          </motion.div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <DynamicFeatureCard
-              icon="/images/check.svg"
-              title="Check"
-              description="there are no conflicts"
-            />
-            <DynamicFeatureCard
-              icon="/images/animate.svg"
-              title="Animate"
-              description="user behaviour specification"
-            />
-            <DynamicFeatureCard
-              icon="/images/deduce.svg"
-              title="Deduce"
-              description="the customer requirements"
-            />
-            <DynamicFeatureCard
-              icon="/images/prove.svg"
-              title="Prove"
-              description="the application properties"
-            />
-          </div>
+          <motion.div 
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+            variants={containerVariants}
+          >
+            <motion.div variants={itemVariants}>
+              <Suspense fallback={<div className="w-full h-24 animate-pulse bg-gray-800 rounded" />}>
+                <DynamicFeatureCard
+                  icon="/images/check.svg"
+                  title="Check"
+                  description="there are no conflicts"
+                />
+              </Suspense>
+            </motion.div>
+            <motion.div variants={itemVariants}>
+              <Suspense fallback={<div className="w-full h-24 animate-pulse bg-gray-800 rounded" />}>
+                <DynamicFeatureCard
+                  icon="/images/animate.svg"
+                  title="Animate"
+                  description="user behaviour specification"
+                />
+              </Suspense>
+            </motion.div>
+            <motion.div variants={itemVariants}>
+              <Suspense fallback={<div className="w-full h-24 animate-pulse bg-gray-800 rounded" />}>
+                <DynamicFeatureCard
+                  icon="/images/deduce.svg"
+                  title="Deduce"
+                  description="the customer requirements"
+                />
+              </Suspense>
+            </motion.div>
+            <motion.div variants={itemVariants}>
+              <Suspense fallback={<div className="w-full h-24 animate-pulse bg-gray-800 rounded" />}>
+                <DynamicFeatureCard
+                  icon="/images/prove.svg"
+                  title="Prove"
+                  description="the application properties"
+                />
+              </Suspense>
+            </motion.div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Background Section */}
-      <section className="py-32">
+      <motion.section 
+        className="py-32"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={containerVariants}
+      >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <h2 className="text-h2 text-center mb-16">Our background</h2>
-          <div className="max-w-3xl mx-auto">
+          <motion.h2 
+            className="text-h2 text-center mb-16"
+            variants={itemVariants}
+          >
+            Our background
+          </motion.h2>
+          <motion.div 
+            className="max-w-3xl mx-auto"
+            variants={itemVariants}
+          >
             <h3 className="text-h3 mb-6">A dedicated career</h3>
             <p className="text-body mb-12">
               John Warren has spent his 50-year career dedicated to software engineering and specification, 
@@ -201,19 +304,21 @@ export default function Home() {
               of Defence, and Rio Tinto PLC.
             </p>
             <div className="relative">
-              <DynamicAnimatedVideo
-                webmSrc="/videos/Connections-2.webm"
-                mp4Src="/videos/Connections-2.mp4"
-                fallbackSrc="/images/Connections-2-frame-1.png"
-                alt="Connections Visualization"
-                width={1080}
-                height={1080}
-                className="w-full h-auto rounded-lg shadow-lg"
-              />
+              <Suspense fallback={<div className="w-full aspect-video animate-pulse bg-gray-800 rounded" />}>
+                <DynamicAnimatedVideo
+                  webmSrc="/videos/Connections-2.webm"
+                  mp4Src="/videos/Connections-2.mp4"
+                  fallbackSrc="/images/Connections-2-frame-1.png"
+                  alt="Connections Visualization"
+                  width={1080}
+                  height={1080}
+                  className="w-full h-auto rounded-lg shadow-lg"
+                />
+              </Suspense>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
     </main>
   );
 }

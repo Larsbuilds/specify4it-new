@@ -38,6 +38,7 @@ const zenDots = Zen_Dots({
 export async function generateMetadata() {
   const nonce = headers().get('x-nonce');
   return {
+    dynamic: 'force-static',
     title: "Specify4it - Next Generation API Documentation",
     description:
       "Specify4it is a next-generation API documentation tool that helps you create beautiful, interactive API documentation.",
@@ -102,8 +103,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${spaceMono.variable} ${inter.variable} ${zenDots.variable}`}>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#040414" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="theme-color" content="#040414" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+        <meta name="color-scheme" content="dark light" />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="shortcut icon" type="image/png" href="/favicon.png" />
         <link
@@ -137,10 +140,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen flex flex-col text-white antialiased font-optimization-critical">
+      <body className="min-h-screen flex flex-col text-white antialiased font-optimization-critical overflow-x-hidden">
         <ErrorBoundary>
           <Header />
-          <main className="flex-grow pt-[64px] md:pt-[80px]">{children}</main>
+          <main className="flex-grow w-full max-w-[2000px] mx-auto px-4 sm:px-6 lg:px-8 pt-[64px] md:pt-[80px] overflow-x-hidden">{children}</main>
           <Footer />
         </ErrorBoundary>
         <Script
